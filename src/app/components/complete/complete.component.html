@@ -1,0 +1,16 @@
+<section>
+  <app-icon [icon]="icon"
+    [width]="100"
+    [height]="100"></app-icon>
+  <h1 class="title-display-2">{{ title }}</h1>
+  <p class="text-desc-container text-display-3">{{ description }}
+    <a href="https://apps.apple.com/gb/app/journey-into/id1522643456" target="_blank" *ngIf="downloadBtn">
+      <img src="/assets/img/app-store_logo.svg" alt="" width="135" height="40" /></a>
+  </p>
+  <p *ngIf="descriptionLine2">{{descriptionLine2}}</p>
+  <button mat-ripple 
+    class="btn" 
+    (click)="goToDashboard()">
+    Begin your Journey Into...
+  </button>
+</section>

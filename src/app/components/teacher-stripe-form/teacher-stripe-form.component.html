@@ -1,0 +1,15 @@
+<ng-container *ngIf="!showForm">
+    <p *ngIf="introText">{{introText}}</p>
+    <button 
+        class="btn"
+        (click)="showForm = !showForm">Complete your payments account</button>
+</ng-container>
+<ng-container *ngIf="showForm && user?.creator?.stripe_link && !user?.creator?.stripe_user_id">
+    <p>Congratulations! You are on your way to creating a subscription business.</p>
+    <p>Your profile has been created in the Journey Into app. Download to begin recording and sharing your classes.</p>
+    <p><a href="https://apps.apple.com/gb/app/journey-into/id1522643456" target="_blank">
+        <img src="/assets/img/app-store_logo.svg" alt="" width="135" height="40" /></a></p>
+    <p>Before students can subscribe to you, you will need to set up or link to your exiting Stripe account.</p>
+    <p>Do this now, or come back to it before you publish your first class.</p>
+    <a [href]="user.creator.stripe_link" class="btn">Complete now</a>
+</ng-container>

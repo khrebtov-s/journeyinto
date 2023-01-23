@@ -1,0 +1,126 @@
+<ng-container *ngIf="!spinner.isShowing.value">
+  <div *ngIf="errors" class="text-error m-t-24 m-b-24">
+    {{ errors }}
+  </div>
+
+  <ng-container>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div class="btn btn-bordered switch-btn-content">
+        <button
+          *ngFor="let type of viewTypes"
+          [ngClass]="{ 'active-btn': type.active }"
+          (click)="switchTypes(type.value)"
+        >
+          {{ type.name }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <app-class-media-uploading
+    *ngIf="isVideo"
+    key="'video'"
+    [file]="selectedthumbnail"
+    [user]="user"
+    [status]="status"
+    [requestStatus]="requestStatus"
+    [title]=""
+    [buttonText]="'Upload Video'"
+    [accept]="'video/*'"
+    (setDuration)="setDurationValue($event)"
+    (profileImageUploaded)="onAddMediaUploaded($event, 'video_item')"
+  ></app-class-media-uploading>
+
+  <app-class-media-uploading
+    *ngIf="!isVideo"
+    key="'audio'"
+    [file]="selectedthumbnail"
+    [user]="user"
+    [status]="status"
+    [requestStatus]="requestStatus"
+    [title]=""
+    [accept]="'audio/*'"
+    [buttonText]="'Upload Audio'"
+    (profileImageUploaded)="onAddMediaUploaded($event, 'file_item')"
+  ></app-class-media-uploading>
+
+  <app-class-media-uploading
+    key="'image'"
+    [file]="selectedthumbnail"
+    [user]="user"
+    [status]="status"
+    [requestStatus]="requestStatus"
+    [title]=""
+    [accept]="'image/*'"
+    [buttonText]="'Upload Thumbnail'"
+    (profileImageUploaded)="onAddMediaUploaded($event, 'thumbnail')"
+  ></app-class-media-uploading>
+
+  <form [formGroup]="stepOneForm" class="form-one">
+    <ng-container *ngIf="stepOneForm.get('title'); let title">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'title'"
+        [title]="'Title'"
+        [placeholder]="''"
+        [errors]="title.errors"
+        [hasError]="title.invalid && (title.dirty || title.touched)"
+      ></app-ji-input>
+    </ng-container>
+
+    <ng-container
+      *ngIf="stepOneForm.get('descriptionText'); let descriptionText"
+    >
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [type]="'textarea'"
+        input="descriptionText"
+        [title]="'Description'"
+        [placeholder]="''"
+        [errors]="descriptionText.errors"
+        [hasError]="descriptionText.invalid && stepOneFormSubmitted"
+      >
+      </app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('props'); let props">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [type]="'textarea'"
+        input="props"
+        [title]="'Props'"
+        [placeholder]="''"
+        [errors]="props.errors"
+        [hasError]="props.invalid && stepOneFormSubmitted"
+      >
+      </app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('difficulty'); let difficulty">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'difficulty'"
+        [title]="'Difficulty'"
+        [placeholder]="''"
+        [errors]="difficulty.errors"
+        [hasError]="difficulty.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <hr />
+
+    <button
+      mat-ripple
+      type="button"
+      class="btn"
+      [disabled]="status === requestStatus.pending"
+      (click)="handleNextClick()"
+    >
+      {{ ctaText }}
+    </button>
+  </form>
+</ng-container>

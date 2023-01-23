@@ -1,0 +1,28 @@
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+// App palette
+$palette: (
+  white: #fff,
+  error: #f44336,
+  charcoal: #322B23,
+  black: #322B23,
+  semiTransparent: rgba(0, 0, 0, 0.04),
+  10: #100e0b,
+  20: #322b25,
+  30: #cfc2b9,
+  40: #ac9a8c,
+  50: #8e491d,
+  60: #ede3d4,
+  70: #ededeb,
+  80: #f4eee5,
+  90: #fffcfa,
+  100: #e8e8e8,
+  110: #a7a7a7,
+  120: #787878,
+  130: #711609,
+  140: #009e79,
+  150: #2f2f2f
+);

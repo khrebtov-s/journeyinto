@@ -1,0 +1,52 @@
+@import '../../../../common/styles.common.scss';
+
+.header {
+  padding: 0 16px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+
+  background-color: map-get($palette, white);
+  border-bottom: 1px solid map-get($palette, 70);
+}
+
+.mat-toolbar-row {
+  padding: 0;
+  position: relative;
+
+  white-space: initial!important;
+
+  .header-title {
+    width: calc(100% - 30px);
+    margin-bottom: 0;
+    padding: 0 10px;
+    line-height: 18px;
+  }
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+}
+
+.logo-link {
+  img {
+    height: 52px;
+    display: block;
+  }
+}
+
+.user-profile-nav {
+  margin-right: 12px;
+}
+
+.switch-button {
+  position: absolute;
+  right: 0;
+}
+
+.left-arrow-btn {
+  padding-left: 0;
+  padding-right: 0;
+}

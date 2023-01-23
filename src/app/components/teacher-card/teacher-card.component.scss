@@ -1,0 +1,114 @@
+@import '../../theme/common/styles.common.scss';
+
+$small-col-width: 115px;
+
+.subscribed-teacher-small {
+    margin-top: 20px;
+    padding: 20px 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    app-round-photo {
+        width: 60px;
+    }
+    
+    .teacher-content {
+        margin-right: 20px;
+        width: calc(100% - 80px - #{$small-col-width});
+
+        @media all and (max-width: 500px) {
+            width: calc(100% - 80px);
+        }
+    }
+
+    .card-extra-details {        
+        ::ng-deep p {
+            color: map-get($palette, 110);
+
+            &:last-child,
+            &.single-info {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .cta-container {
+        width: $small-col-width;
+
+        button {
+            min-width: initial;
+            max-width: initial;
+        }
+
+        @media all and (max-width: 500px) {
+            margin-top: 10px;
+            width: 100%;
+        }
+    }
+}
+
+.subscribed-teacher-large {
+    overflow: hidden;
+    
+    .image-header {
+        height: 0;
+        padding-bottom: 70%;
+        overflow: hidden;
+        position: relative;
+
+        img {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    .content {
+
+        > div {
+            &:first-child {
+                padding: 25px 15px 0;
+            }
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 5px;
+
+            span:first-child {
+                margin-right: 10px;
+            }
+
+            &.teacher-style {
+                margin-top: 20px;
+            }
+        }
+
+        .cta {
+            margin-top: 20px;
+            
+            &:not(.subscription) {
+                padding: 0 15px 25px;
+            }
+
+            &.subscription {
+
+                p {
+                    padding: 15px;
+                    margin-bottom: 0;
+
+                    background-color: map-get($palette, 30);
+                }
+            }
+            // display: inline-block;
+        }
+    }
+}

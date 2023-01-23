@@ -1,0 +1,22 @@
+<ng-container *ngIf="!accessDenied.status">
+    <app-class-recording 
+        *ngIf="recording"
+        [recording]="recording"></app-class-recording>
+</ng-container>
+<ng-container *ngIf="accessDenied.status">
+    <section class="wrapper">
+        <p>Sorry, you can't access this recording.</p>
+        
+        <a *ngIf="accessDenied.reason.url"
+            mat-ripple
+            class="btn access-denied-cta"
+            [routerLink]="accessDenied.reason.url">{{accessDenied.reason.text}}</a>
+        
+        <button *ngIf="accessDenied.reason.classBought"
+            mat-ripple
+            class="btn access-denied-cta"
+            (click)="buyClass(accessDenied.reason.classBought)">
+            {{accessDenied.reason.text}}
+        </button>
+    </section>
+</ng-container>

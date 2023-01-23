@@ -1,0 +1,107 @@
+<div class="wrapper">
+  <ng-container *ngIf="!spinner.isShowing.value">
+    <ng-container *ngIf="!showSignupCompletedMsg; else signupCompletedMsg">
+      <section>
+        <app-round-photo [image]="user?.creator?.image"></app-round-photo>
+        <h1 class="title-display-4 user-title">{{ user?.first_name }}</h1>
+      </section>
+      
+      <ng-container *ngIf="user?.creator?.stripe_user_id; else completeRegister">
+        <!-- subscribers -->
+        <section>
+          <h1 class="text-display-2">My Activity</h1>
+          <hr>
+          <ng-container *ngIf="subscribed.length; else elseNoSubscribed">
+            <p class="text-display-5">{{ subscribed.length }} <span 
+              class="text-display-6">{{ subscribed.length > 1 ? ' students' : ' student' }}</span>
+            </p>
+            <p class="text-display-5">5<span class="text-display-6"> classes</span></p>
+            <p class="text-display-5">26/07/19<span class="text-display-6"> date of last upload</span></p>
+            <hr>
+          </ng-container>
+        </section>
+        <ng-template #elseNoSubscribed>
+          <p class="text-display-3">Build your subscription business by publishing a weekly audio class for your students.</p>
+          <a class="btn" 
+            [routerLink]="['/', routeNames.teacher, routeNames.recordings, routeNames.new]">Record a class</a>
+        </ng-template>
+      </ng-container>
+    
+      <ng-template #completeRegister>
+        <section>
+          <app-teacher-stripe-form 
+            [showForm]="false"
+            [introText]="'To start recording classes and allow students to subscribe to them, please complete your payments account.'"></app-teacher-stripe-form>
+        </section>
+      </ng-template>
+    
+      <!-- bookings -->
+      <section>
+        <h1 class="text-display-2">My bookings</h1>
+        <hr>
+        <ul *ngIf="bookings && bookings.length > 0; else elseNoBooking" class="bookings-list">
+          <li *ngFor="let booking of bookings">
+            <app-booking-card [booking]="booking"></app-booking-card>
+          </li>
+        </ul>
+      </section>
+      <ng-template #elseNoBooking>
+        <p class="text-display-3">Create a slot so your students can book</p>
+        <button mat-ripple type="button" class="btn">Create booking slots</button>
+      </ng-template>
+      
+      <!-- Notifications -->
+      <section>
+        <h1 class="text-display-2">Notifications</h1>
+        <hr>
+        <ng-container *ngIf="notifications && notifications.length; else elseNoNotification">
+          <ul class="notifications-list">
+            <li *ngFor="let notification of notifications">
+              <app-notification-card [notification]="notification"></app-notification-card>
+            </li>
+          </ul>
+          <a [routerLink]="['/', routeNames.notifications]" 
+            mat-ripple 
+            class="btn">View all notifications</a>
+        </ng-container>
+        <ng-template #elseNoNotification>
+          <p class="text-display-3">You don’t currently have any notifications.</p>
+        </ng-template>
+      </section>
+      
+      <section class="url" *ngIf="user?.creator?.slug">
+        <h1 class="text-display-2">Your personal link</h1>
+        <hr>
+        <p class="text-displaty-3">Share with your students so they can find you instantly</p>
+        <div class="copy-area">
+          <input type="text"
+            value="{{appUrl}}/{{routeNames.teachers}}/{{user?.creator?.slug}}"
+            #profileUrl />
+          <p class="text-display-6">{{appUrl}}/{{routeNames.teachers}}/{{user?.creator?.slug}}</p>
+          <span *ngIf="copied">Copied!</span>
+        </div>
+        <button mat-ripple
+          type="button"
+          (click)="copyProfileUrl(profileUrl)"
+          class="btn btn-bordered">Copy url</button>
+        <a 
+          class="btn public-profile-link"
+          [routerLink]="['/', routeNames.teachers, user?.creator?.slug]">View your public profile</a>
+      </section>
+    </ng-container>
+  
+    <ng-template #signupCompletedMsg>
+      <section class="signup-completed">
+        <div class="content">
+          <app-icon [icon]="'thumbs_up_icon'"
+            [width]="50"></app-icon>
+          <h1 class="title-display-2">Thanks for registering</h1>
+          <p>Vivamus congue orci velit, id imperdiet dolor fringilla at.</p>
+        </div>
+        <button 
+          class="btn"
+          (click)="showSignupCompletedMsg = !showSignupCompletedMsg">Go to home</button>
+      </section>
+    </ng-template>
+  </ng-container>
+</div>

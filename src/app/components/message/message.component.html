@@ -1,0 +1,11 @@
+<section *ngIf="message"
+    class="wrapper">
+    <p>{{message}}
+        <span (click)="closeMessage()">
+            <app-icon 
+                [icon]="'close_icon'"
+                [width]="12"
+                [height]="12"></app-icon>
+        </span>
+    </p>
+</section>

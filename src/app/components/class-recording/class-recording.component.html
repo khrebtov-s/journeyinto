@@ -1,0 +1,189 @@
+<ng-container class="text-display-2" *ngIf="recordedClass">
+  <div class="wrapper">
+    <section class="recording-header" *ngIf="recordType; else notFound">
+      <div class="recording-thumbnail" *ngIf="!video">
+        <img [src]="poseImagePath" />
+      </div>
+      <video
+        class="video-record"
+        id="classVideo"
+        [hidden]="!video"
+        (contextmenu)="onRightClick()"
+        controlsList="nodownload"
+      >
+        <source type="video/mp4" />
+      </video>
+      <div
+        [ngClass]="{
+          'range-container': isMobile,
+          'slider-hover': !isMobile && sliderHover
+        }"
+        (mouseenter)="toggleHover()"
+        (mouseleave)="toggleHover()"
+        *ngIf="recordType && isTrackLoaded"
+      >
+        <mat-slider
+          *ngIf="!isMobile"
+          class="recording-slider"
+          thumbLabel
+          [displayWith]="formatLabel"
+          [value]="sliderValue"
+          [min]="recordedClass.start_timestamp"
+          [max]="recordedClass.end_timestamp"
+          (input)="onSliderChangeEnd($event)"
+        ></mat-slider>
+        <input
+          *ngIf="isMobile"
+          type="range"
+          [min]="recordedClass.start_timestamp"
+          [max]="recordedClass.end_timestamp"
+          [value]="sliderValue"
+          class="slider"
+          (input)="onRangeChangeEnd($event)"
+          (change)="onRangeChangeEnd($event)"
+          step="any"
+          #slider
+        />
+      </div>
+      <div class="time-tracker" *ngIf="recordType && isTrackLoaded">
+        <p class="text-display-6">
+          {{ trackedTime | minuteSeconds }} /
+          {{ trackDuration | minuteSeconds }}
+        </p>
+      </div>
+      <div class="audio-controls" *ngIf="recordType && isTrackLoaded">
+        <button
+          mat-ripple
+          class="btn play-jump-btn btn-bordered go-backwards"
+          (click)="movePlayback(false)"
+        >
+          <app-icon [width]="35" [icon]="'play-jump_icon'"></app-icon>
+          <span class="text-display-9">30</span>
+        </button>
+        <button
+          mat-ripple
+          class="btn play-btn btn-bordered"
+          (click)="playPauseAudio()"
+        >
+          <span
+            class="play"
+            *ngIf="(audio && audio.paused) || (video && video.paused)"
+          >
+            <app-icon
+              [width]="28"
+              [height]="40"
+              [icon]="'play_icon'"
+            ></app-icon>
+          </span>
+          <span
+            class="pause"
+            *ngIf="(audio && !audio.paused) || (video && !video.paused)"
+          >
+            <app-icon [width]="40" [icon]="'pause_icon'"></app-icon>
+          </span>
+        </button>
+        <button
+          mat-ripple
+          class="btn play-jump-btn btn-bordered"
+          (click)="movePlayback(true)"
+        >
+          <app-icon [width]="35" [icon]="'play-jump_icon'"></app-icon>
+          <span class="text-display-9">30</span>
+        </button>
+        <button class="full-screen" (click)="moveFullScreen()"></button>
+      </div>
+      <p class="loading-message" *ngIf="recordType && !isTrackLoaded">
+        Media loading ...
+      </p>
+    </section>
+
+    <section id="recording-info">
+      <h1 class="title-display-2 m-b-10">Session Details</h1>
+      <mat-divider class="m-b-15"></mat-divider>
+
+      <div>
+        <p class="text-display-5" *ngIf="recordType && isTrackLoaded">
+          Length
+          <span class="text-display-6">{{
+            trackDuration || emptyField | minuteSeconds
+          }}</span>
+        </p>
+        <p class="text-display-5">
+          Level
+          <span class="text-display-6">{{
+            recordedClass.difficulty || emptyField
+          }}</span>
+        </p>
+        <p class="text-display-5">
+          Props <br />
+          <span
+            class="text-display-6"
+            [innerHTML]="recordedClass.props | replaceLineBreaks"
+          ></span>
+        </p>
+      </div>
+    </section>
+
+    <section *ngIf="recordedClass.poses.length">
+      <h1 class="title-display-2 m-b-10">
+        Postures in this class (<span>{{ recordedClass.poses.length }}</span
+        >)
+      </h1>
+      <mat-divider class="m-b-15"></mat-divider>
+
+      <div class="tabs-container">
+        <mat-tab-group
+          class="app-tabs"
+          headerPosition="below"
+          [selectedIndex]="tabIndex"
+        >
+          <mat-tab *ngFor="let pose of recordedClass.poses">
+            <div
+              fxLayout="column"
+              fxLayoutAlign="center center"
+              fxLayoutGap="20px"
+            >
+              <div>
+                <img [src]="pose.pose.image" height="220" />
+              </div>
+              <div fxLayout="row" fxLayoutAlign="center center">
+                <span>Name:</span>{{ pose.pose.title }}<br />
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button class="btn left-arrow-btn" (click)="swipeLeft()"></button>
+        <button class="btn right-arrow-btn" (click)="swipeRight()"></button>
+      </div>
+    </section>
+
+    <section *ngIf="recordedClass.description">
+      <h1 class="title-display-2 m-b-10">Teachers notes</h1>
+      <mat-divider class="m-b-15"></mat-divider>
+      <div
+        class="text-display-1"
+        [innerHTML]="recordedClass.description | replaceLineBreaks | getParsedTextWithHref"
+      ></div>
+    </section>
+
+    <!-- <section class="cta"
+            *ngIf="canEdit">
+            <a class="btn btn-large btn-rounded bg-20"
+                [routerLink]="[routeNames.editRecording]">Edit</a>
+            <a class="btn btn-large btn-rounded bg-20"
+                (click)="deleteRecording()">Delete</a>
+        </section> -->
+  </div>
+</ng-container>
+<ng-template #notFound>
+  <section>
+    <p class="text-display-2 not-found-message">
+      Sorry, this media file seems to be broken{{
+        canEdit ? " or has not finished uploading yet" : ""
+      }}.
+    </p>
+  </section>
+</ng-template>

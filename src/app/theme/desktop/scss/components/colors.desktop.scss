@@ -1,0 +1,13 @@
+@import '../../../common/styles.common';
+
+@each $key, $val in $palette {
+  .bg-#{$key} {
+    background-color: #{$val} !important;
+  }
+}
+
+@each $key, $val in $palette {
+  .font-color-#{$key} {
+    color: #{$val} !important;
+  }
+}

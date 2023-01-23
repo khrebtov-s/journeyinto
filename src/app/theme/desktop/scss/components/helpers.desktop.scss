@@ -1,0 +1,65 @@
+@import '../../../common/styles.common';
+
+.width-100 {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-error {
+  color: map-get($palette, 50);
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+
+
+
+
+.cdk-overlay-pane {
+  position: relative !important;
+}
+
+.close-dialog-img {
+  position: absolute;
+  top: -27px;
+  right: -16px;
+  transform: translate(-50%, -50%);
+}
+.remove-item {
+  position: absolute;
+  top: 0;
+  margin-top: 10px;
+  right: 0;
+  margin-right: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.border-none {
+  border: none;
+}
+
+.logo-text {
+  width: 122px;
+  background: url(/assets/img/logo-text.svg) no-repeat center center;
+  background-size: contain;
+}

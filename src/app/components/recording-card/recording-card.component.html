@@ -1,0 +1,36 @@
+<!-- NOT USED!!!! -->
+<article class="card" *ngIf="recording">
+    <div class="recording-header">
+        <img src="{{ recording.poses[0].pose.image }}" *ngIf="recording.poses[0]" />
+        <img src="assets/img/class1.png" *ngIf="!recording.poses[0]" />
+    </div>
+
+    <div class="recording-content">
+        <h1 class="text-display-2 recording-title">{{ recording.title || emptyField }} - {{ recording.status || emptyField | uppercase }}</h1>
+        <p *ngIf="recording.status == recordingStates.UPLOADING">Waiting for file to upload...</p>
+        <p *ngIf="recording.status == recordingStates.RECORDING">Waiting for recording to finish...</p>
+        
+        <div *ngIf="recording.status != recordingStates.UPLOADING 
+            && recording.status != recordingStates.RECORDING"
+            class="recording-details">
+            <p class="text-display-6">
+                <span class="text-display-5">Length:</span> {{ recording.length || emptyField }}
+            </p>
+            <p class="text-display-6">
+                <span class="text-display-5">Difficulty:</span> {{ recording.difficulty || emptyField }}
+            </p>
+        </div>
+        <div 
+            *ngIf="recording.description"
+            class="recording-description">
+            {{recording.description | excerpt}}
+        </div>
+
+        <div class="cta">
+            <a class="btn btn-bordered btn-small" 
+                [routerLink]="[recording.slug]">View</a>
+            <a class="btn btn-bordered btn-small" 
+                [routerLink]="[recording.slug, routeNames.editAudio]">Edit class</a>
+        </div>
+    </div>
+</article>

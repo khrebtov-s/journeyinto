@@ -1,0 +1,23 @@
+@import '../../theme/common/styles.common.scss';
+
+#card-errors {
+  margin-top: 10px;
+  color: map-get($palette, error);
+}
+
+.new-payment-btn {
+  margin-top: 15px;
+}
+
+form {
+  margin-top: 40px;
+  
+  .btn {
+    margin-top: 30px;
+  }
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}

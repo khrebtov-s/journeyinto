@@ -1,0 +1,14 @@
+$medium: 680px;
+::ng-deep .mat-dialog-container {
+  border-radius: 9px;
+}
+.mat-dialog-content {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  @media all and (max-width: $medium) {
+    width: 100%;
+    margin: auto;
+  }
+}

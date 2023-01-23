@@ -1,0 +1,1 @@
+export const redirectMessage = 'You were redirected here as you need to complete your profile.';

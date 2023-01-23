@@ -1,0 +1,28 @@
+<ng-container *ngIf="student && studentDeets && !spinner.isShowing.value">
+    <div class="wrapper">
+        <section>
+            <!-- <h1 class="text-display-2">{{student.status | titlecase}}</h1>
+            <hr> -->
+            <p class="text-display-6 student-details">
+                <span>{{studentDeets.first_name}} {{studentDeets.last_name}}</span>
+                <span>Email: <a href="mailto:{{studentDeets.email}}">{{studentDeets.email}}</a></span>
+                <span *ngIf="studentDeets.telephone">Tel: <a href="tel:{{studentDeets.telephone}}">{{studentDeets.telephone}}</a></span>
+            </p>
+            <hr>
+        </section>
+        <!-- <section class="student-bookings">
+            <h1 class="text-display-2">Upcoming bookings</h1>
+            <p>This student has not made a booking yet.</p>
+        </section> -->
+        <section class="subscription-status">
+            <h1 class="text-display-2">Active subscription - <span>{{student.is_subscribed.length ? 'Yes' : 'No'}}</span></h1>
+            <!-- <hr> -->
+            <!-- <p class="text-display-5">Total student value to date <span class="text-display-6">TBC</span></p> -->
+            <!-- <hr> -->
+        </section>
+        <!-- <section class="cta">
+            <button class="btn btn-large btn-rounded bg-20 width-100"
+                (click)="handleApproveDeclineClick()">{{student.status === 'approved' ? 'Decline' : 'Approve'}}</button>
+        </section> -->
+    </div>
+</ng-container>

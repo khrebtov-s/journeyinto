@@ -1,0 +1,12 @@
+<div class="card" *ngIf="notification">
+    <app-icon 
+        [width]="20"
+        [icon]="'new'"></app-icon>
+    <div class="content">
+        <p class="text-display-5">{{ notification.title }}</p>
+        <p class="text-display-6">{{ notification.description }}</p>
+    </div>
+    <div class="cta">
+        <button class="btn btn-bordered btn-small">View</button>
+    </div>
+</div>

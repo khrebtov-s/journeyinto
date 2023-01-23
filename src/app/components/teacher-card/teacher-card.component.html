@@ -1,0 +1,60 @@
+<article 
+    class="subscribed-teacher-small card" 
+    *ngIf="teacher && !large">
+    <app-round-photo [image]="teacher.image"></app-round-photo>
+    <div class="teacher-content">
+        <h1 class="text-display-2">{{ teacher.first_name }} {{ teacher.last_name }} - {{ teacher?.profile_title }}
+        </h1>
+        <div class="card-extra-details">
+            <p class="text-display-1 single-info" 
+                *ngIf="extra.childNodes.length == 0">{{teacher.style}}</p>
+            <span #extra>
+                <ng-content select="[extraDetails]"></ng-content>
+            </span>
+        </div>
+    </div>
+    <div class="cta-container">
+        <a *ngIf="cta.childNodes.length == 0"
+            class="btn btn-bordered btn-small"
+            [routerLink]="teacherLink">View profile</a>
+        <span #cta>
+            <ng-content select="[cta]"></ng-content>
+        </span>
+    </div>
+</article>
+
+<article 
+    *ngIf="teacher && large"
+    class="subscribed-teacher-large card">
+    <div class="image-header">
+        <img *ngIf="teacher.image" src="{{ teacher.image }}" />
+        <img *ngIf="!teacher.image" src="assets/img/class1.png" />
+    </div>
+    <div class="content">
+        <div>
+            <h1 *ngIf="teacher.first_name && teacher.last_name" 
+                class="title-display-5">{{teacher.first_name}} {{teacher.last_name}}{{classBought ? ' - ' + classBought.title : ''}}</h1>
+            
+            <p *ngIf="teacher.style" class="text-display-5 teacher-style">{{teacher.style}}</p>
+        </div>
+        <div 
+            class="cta"
+            [ngClass]="{
+                'single-btn': selectable,
+                'subscription': !!subscribeTo
+            }">
+            <ng-container *ngIf="!subscribeTo; else subscribeSection">
+                <a (click)="goToTeacher()"
+                    class="btn btn-bordered btn-small">View profile</a>
+                    
+                <!-- <button 
+                    *ngIf="selectable"
+                    (click)="handleConnect()"
+                    class="btn btn-small">Select teacher</button> -->
+            </ng-container>
+            <ng-template #subscribeSection>
+                <p class="text-display-4">{{subscribeTo}}</p>
+            </ng-template>
+        </div>
+    </div>
+</article>

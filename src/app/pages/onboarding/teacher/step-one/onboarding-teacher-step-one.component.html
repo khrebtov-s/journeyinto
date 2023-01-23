@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <ng-container *ngIf="user && user.view_status === viewStatuses.TEACHER">
+    <app-message [message]="usefulMessage"></app-message>
+    <p class="text-display-2">Your profile is the first thing students see when they search for you. Tell them a bit about yourself, then you can start recording classes your students can subscribe to or purchase.</p>
+    <app-teacher-profile-form 
+      [allowSkip]="true"
+      [errors]="errors"
+      (continueClicked)="onContinueClicked($event)"></app-teacher-profile-form>
+  </ng-container>
+</div>

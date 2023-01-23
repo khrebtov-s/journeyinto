@@ -1,0 +1,124 @@
+<section class="wrapper" *ngIf="!spinner.isShowing.value">
+  <h1 class="title-display-1 main-title">Welcome {{ user?.first_name }}</h1>
+  <section 
+    *ngIf="!isSubscribedUser && creator?.classes.length"
+    class="subscribe-cta">
+    <h2 class="text-display-2">Why subscribe?</h2>
+    <hr>
+    <p>Your teacher is creating new content every week so you can practice anywhere, any time with the support of their familiar phrasing, sequences and tone.</p>
+    <button mat-ripple 
+      type="button"
+      [routerLink]="['/', routeNames.student, routeNames.subscription ]" 
+      class="btn">
+      Subscribe to {{ creator?.first_name }} {{ creator?.last_name }}
+    </button>
+  </section>
+  
+  <section>
+    <!-- USER CLASSES -->
+    <ng-container *ngIf="userClasses.length">
+      <ul class="user-classes">
+        <li *ngFor="let userClass of userClasses | slice:0:2">
+          <app-class-card 
+            [singleClass]="userClass"
+            [teacher]="creator"></app-class-card>
+        </li>
+      </ul>
+    </ng-container>
+    
+    <!-- SAMPLE CLASSES -->
+    <ng-container *ngIf="!isSubscribedUser">
+      <h2 class="text-display-2">Short classes</h2>
+      <ng-container *ngIf="sampleClasses.length; else emptySampleClasses">
+        <ul>
+          <li *ngFor="let sampleClass of sampleClasses | slice:0:2">
+            <app-class-card 
+              [singleClass]="sampleClass"
+              [teacher]="creator"></app-class-card>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #emptySampleClasses>
+        Your teacher doesn't have any short classes yet.
+      </ng-template>
+    </ng-container>
+    
+    <a *ngIf="userClasses.length"
+      class="btn view-all-btn"
+      [routerLink]="['/', routeNames.student, routeNames.myPractice]">View all classes</a>
+  </section>
+
+  <!-- bookings -->
+  <!-- <div class="text-display-2 m-t-40">Your bookings</div>
+  <div *ngIf="bookings.length; else elseNoBooking">
+    <div class="m-t-16 card p-t-10 p-r-10 p-l-10 p-b-10" *ngFor="let booking of bookings">
+      <div class="m-t-16" fxFlex="10">
+        <img class="bot-nav-img" src="assets/img/calendar.svg" />
+      </div>
+      <div fxFlex="60">
+        <div class="text-display-5">{{ booking.title }}</div>
+        <div class="text-display-6 m-t-12">{{ booking.date }}</div>
+      </div>
+      <div class="m-t-16" fxFlex="30" fxLayoutAlign="flex-end top">
+        <button class="btn btn-bordered app-small-btn">View</button>
+      </div>
+    </div>
+    <div class="m-t-18">
+      <button mat-ripple type="button" class="btn btn-large btn-rounded bg-20 width-100">
+        View all bookings
+      </button>
+    </div>
+  </div>
+  <ng-template #elseNoBooking> else No Booking</ng-template>  -->
+  
+  <!-- Notifications -->
+  <!-- <div class="text-display-2 m-t-40">Notifications</div>
+  <div *ngIf="notifications.length; else elseNoNotification">
+    <div class="m-t-16 card p-t-10 p-r-10 p-l-10 p-b-10" *ngFor="let notification of notifications">
+      <div class="m-t-16" fxFlex="10">
+        <img class="bot-nav-img" src="assets/img/new.svg" />
+      </div>
+      <div fxFlex="60">
+        <div class="text-display-5">{{ notification.title }}</div>
+        <div class="text-display-6 m-t-12">{{ notification.description }}</div>
+      </div>
+      <div class="m-t-16" fxFlex="30" fxLayoutAlign="flex-end top">
+        <button class="btn btn-bordered app-small-btn">{{ notification.action }}</button>
+      </div>
+    </div>
+  
+    <div class="m-t-12">
+      <button
+        [routerLink]="['/', routeNames.notifications]"
+        mat-ripple
+        type="button"
+        class="btn btn-large btn-rounded bg-20 m-b-12 width-100"
+      >
+        View all notifications
+      </button>
+    </div>
+  </div>
+  <ng-template #elseNoNotification>
+    <hr class="m-t-20" />
+    <div class="text-display-3 m-t-12">You don’t currently have any notifications.</div>
+    <div class="m-t-12">
+      <div class="text-display-2 m-t-40">Your private profile url is -</div>
+      <hr />
+      <input
+        class="text-display-6 m-t-12 width-100 border-none"
+        type="text"
+        value="https://journeyinto.com/teachers/madelaine-hart"
+        #profileUrl
+      />
+      <button
+        mat-ripple
+        type="button"
+        (click)="copyProfileUrl(profileUrl)"
+        class="btn btn-large btn-rounded btn-bordered bg-white font-color-10 m-b-13 width-100 mat-ripple m-t-20"
+      >
+        Copy url
+      </button>
+    </div>
+  </ng-template>
+  </div>  -->
+</section>

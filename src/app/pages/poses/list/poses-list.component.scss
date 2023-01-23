@@ -1,0 +1,27 @@
+ul {
+    margin-top: 20px;
+    list-style-type: none;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+
+    li {
+        margin-bottom: 20px;
+        width: calc(50% - 10px);
+
+        a {
+            display: block;
+            height: 100%;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        h1 {
+            padding: 10px;
+        }
+    }
+}

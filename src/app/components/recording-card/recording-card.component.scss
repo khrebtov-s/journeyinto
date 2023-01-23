@@ -1,0 +1,49 @@
+@import '../../theme/common/styles.common.scss';
+
+.recording-header {
+    position: relative;
+
+    img {
+        width: 100%;
+    }
+}
+
+.recording-content {
+    padding: 20px;
+
+    h1 {
+        margin-bottom: 10px;
+    }
+}
+
+.recording-details {
+    display: flex;
+    margin-bottom: 20px;
+
+    p {
+        margin-bottom: 0;
+
+        &:first-child {
+            padding-right: 40px;
+            border-right: solid 1px map-get($palette, 100);
+        }
+
+        &:last-child {
+            padding-left: 40px;
+        }
+    }
+}
+
+.recording-description {
+    margin-bottom: 15px;
+}
+
+.cta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    a {
+        width: calc(50% - 10px);
+    }
+}

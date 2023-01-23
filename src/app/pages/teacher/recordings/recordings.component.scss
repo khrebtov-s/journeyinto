@@ -1,0 +1,87 @@
+section {
+  margin-top: 40px;
+
+  &:first-child {
+    margin-top: 24px;
+  }
+
+  &.recording-stats {
+    .stats {
+      margin: 20px 0;
+
+      span {
+        display: block;
+      }
+    }
+
+    a {
+      margin-top: 15px;
+    }
+  }
+
+  &.no-recordings {
+    text-align: center;
+
+    a {
+      margin-top: 30px;
+    }
+  }
+}
+
+.recordings-list {
+  li {
+    margin-bottom: 20px;
+    position: relative;
+
+    &.unpublish {
+      content: "\A";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+    }
+
+    .dropdown_option {
+      right: 0;
+      bottom: 0;
+      padding: 10px 20px;
+      position: absolute;
+      width: 100%;
+
+      .change-thumb {
+        position: absolute;
+        top: -100px;
+        width: 150px;
+        margin: 0 20px;
+        right: 0;
+        background: #fff;
+        color: #000;
+      }
+
+      .patreon-teaser__button {
+        padding: 10px 20px;
+        background: #3ac47d;
+        color: #fff
+      }
+
+      .active-btn {
+        background: #c13229;
+      }
+    }
+  }
+}
+
+.complete-register {
+  text-align: center;
+
+  hr {
+    margin: 20px 0 30px;
+  }
+}
+
+.delete-all {
+  margin-bottom: 20px;
+}

@@ -1,0 +1,26 @@
+<form [formGroup]="profileImageForm" enctype="multipart/form-data">
+    <div class="m-t-30">
+        <label class="text-display-4">Your profile image</label>
+
+        <div *ngIf="user?.creator?.image && !fileName" class="m-t-24 m-b-24 profile-photo">
+            <img src="{{ user.creator.image }}" alt="" />
+        </div>
+        <div *ngIf="fileName" class="m-t-24 m-b-24">
+            <img class="preview-image" src="" alt="" #imagePreview />
+            <!-- <p>{{fileName}}</!-->
+        </div>
+
+        <div class="m-t-12 m-b-40">
+            <input #profileImageFile name="_image" type="file" accept="image/*" (change)="onProfileImageForm($event)"
+                class="display-none" />
+            <input type="hidden" name="image" formControlName="image" />
+
+            <button mat-ripple type="button" class="btn"
+                [disabled]="status === requestStatus.pending" 
+                (click)="profileImageFile.click()">
+                {{ (fileName || user?.creator?.image) ? 'Change Photo' : 'Upload photo' }}
+            </button>
+            <p class="text-display-6 m-t-10" *ngIf="!fileName || !user?.creator?.image">A head and shoulders picture is perfect!</p>
+        </div>
+    </div>
+</form>

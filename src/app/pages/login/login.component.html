@@ -1,0 +1,48 @@
+<div class="wrapper">  
+  <section class="text-center inner-logo">
+      <img src="/assets/img/logo.svg">
+
+      <app-message [message]="message"></app-message>
+      <app-errors [errors]="errors"></app-errors>
+  </section>
+
+  <form [formGroup]="loginForm" class="form-two">
+    <ng-container *ngIf="loginForm.get('email'); let email">
+      <app-ji-input
+        [parentForm]="loginForm"
+        [input]="'email'"
+        [type]="'email'"
+        [title]="'Email'"
+        [errors]="email.errors"
+        [isValid]="email.valid && email.value"
+        [hasError]="email.invalid && loginFormSubmitted"></app-ji-input>
+    </ng-container>
+    <ng-container *ngIf="loginForm.get('password'); let password">
+      <app-ji-input
+        [parentForm]="loginForm"
+        [input]="'password'"
+        [type]="'password'"
+        [title]="'Password'"
+        [errors]="password.errors"
+        [isValid]="password.valid && password.value"
+        [hasError]="password.invalid && loginFormSubmitted"></app-ji-input>
+    </ng-container>
+    <section class="cta">
+      <button
+        mat-ripple
+        type="submit"
+        class="btn btn-large btn-rounded bg-20 width-100"
+        (click)="handleSubmitClick()"
+        [disabled]="status === requestStatus.pending">Login</button>
+      <button
+        mat-ripple
+        type="button"
+        class="btn btn-large btn-rounded btn-bordered width-100"
+        [disabled]="status === requestStatus.pending"
+        (click)="goToSignup()">Register</button>
+      <a (click)="forgottenPassword()" 
+        class="text-display-1 forgot-password-link">Forgot password?</a>
+      <a (click)="openTakethetourModal()" class="text-display-1">Take the tour</a>
+    </section>
+  </form>
+</div>

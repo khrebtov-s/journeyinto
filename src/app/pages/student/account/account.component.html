@@ -1,0 +1,137 @@
+<div class="wrapper" *ngIf="user && !spinner.isShowing.value">
+  <app-message [message]="message"></app-message>
+
+  <!-- subscriptions -->
+  <section *ngIf="creator">
+    <h2 class="text-display-2">
+      {{ isUserSubscribed ? "Your subscriptions" : "Your teacher" }}
+    </h2>
+
+    <app-teacher-card
+      *ngIf="isUserSubscribed; else defaultTeacher"
+      [teacher]="creator"
+    >
+      <p extraDetails>
+        {{ subscription.cost | currency: currency.toUpperCase() }} per
+        {{ subscription.frequency }}
+        <br />
+        {{
+          subscription.status === subscriptionStatuses.canceled
+            ? "CANCELED. Subscription ends"
+            : "Next Payment"
+        }}: {{ subscription.end_period | date: "mediumDate" }}
+      </p>
+
+      <button
+        cta
+        *ngIf="subscription.status !== subscriptionStatuses.canceled"
+        class="btn btn-small btn-bordered"
+        (click)="confirmUnsubscribeTeacher(creator)"
+      >
+        Cancel Subscription
+      </button>
+    </app-teacher-card>
+
+    <ng-template #defaultTeacher>
+      <app-teacher-card [teacher]="creator"></app-teacher-card>
+    </ng-template>
+  </section>
+
+  <!-- Contact details form -->
+  <section>
+    <h1 class="text-display-2">Contact details</h1>
+    <hr />
+    <form [formGroup]="contactDetailsForm">
+      <ng-container *ngIf="contactDetailsForm.get('email'); let email">
+        <app-ji-input
+          [parentForm]="contactDetailsForm"
+          [type]="'email'"
+          [input]="'email'"
+          [title]="'Email'"
+          [errors]="email.errors"
+          [hasError]="email.invalid && (email.dirty || email.touched)"
+        ></app-ji-input>
+      </ng-container>
+      <ng-container *ngIf="contactDetailsForm.get('telephone'); let telephone">
+        <app-ji-input
+          [parentForm]="contactDetailsForm"
+          [input]="'telephone'"
+          [title]="'Telephone'"
+        ></app-ji-input>
+      </ng-container>
+      <p [ngStyle]="{color: status === requestStatus.failure ? 'red' : 'green'}" *ngIf="status === requestStatus.failure
+      || status === requestStatus.success">{{status}}</p>
+      <button
+        mat-ripple
+        type="submit"
+        class="btn"
+        [disabled]="
+          contactDetailsForm.invalid ||
+          !isContactDetailsFormEdited
+        "
+        (click)="saveContactDetails()"
+      >
+        Save changes
+      </button>
+    </form>
+  </section>
+
+  <!-- Password form -->
+  <section>
+    <h1 class="text-display-2">Password</h1>
+    <hr />
+    <form [formGroup]="passwordForm">
+      <app-password-match-input
+        formControlName="password"
+        (passwordFormValid)="enableSaveButton($event)"
+      ></app-password-match-input>
+      <button
+        mat-ripple
+        type="submit"
+        class="btn"
+        [disabled]="pwBtnDisabledState"
+        (click)="savePassword()"
+      >
+        Save changes
+      </button>
+    </form>
+  </section>
+
+  <section>
+    <h1 class="text-display-2">Saved payment methods</h1>
+    <hr />
+
+    <p *ngIf="cards.length === 0 && !stripeFormShown" class="text-display-4">
+      You don't have any saved cards.
+    </p>
+
+    <ul *ngIf="cards.length && !stripeFormShown" class="payment-cards">
+      <li *ngFor="let card of cards">
+        <app-payment-card
+          [card]="card"
+          [isDefault]="card.is_default"
+          [customCtaContent]="!card.is_default"
+        >
+          <button
+            *ngIf="!card.is_expired && !card.is_default"
+            class="btn btn-bordered btn-small make-default-btn"
+            (click)="makeDefault(card.id)"
+          >
+            Make default
+          </button>
+          <button
+            *ngIf="!card.is_default"
+            class="btn btn-bordered btn-small"
+            (click)="removeCard(card.id)"
+          >
+            Remove
+          </button>
+        </app-payment-card>
+      </li>
+    </ul>
+
+    <app-card-button
+      (stripeFormShown)="onStripeFormShown($event)"
+    ></app-card-button>
+  </section>
+</div>

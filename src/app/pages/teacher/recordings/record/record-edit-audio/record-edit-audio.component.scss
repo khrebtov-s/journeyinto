@@ -1,0 +1,200 @@
+@import '../../../../../theme/common/styles.common.scss';
+
+.no-recording-file {
+  p {
+    margin: 40px 0 20px;
+    text-align: center;
+  }
+
+  a:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.timerWrapper {
+  margin-top: 40px;
+  
+  padding: 0 5px;
+  display: block !important;
+}
+
+.timeline {
+  position: relative;
+}
+
+.middle-timeline:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  border-left: 1px solid map-get($palette, black);
+  transform: translate(-50%);
+}
+
+.line-tick {
+  position: absolute;
+  left: 52%;
+  width: 7px;
+  border-top: 1px solid map-get($palette, black);
+}
+
+.timeline-time {
+  position: relative;
+}
+
+.time-tick {
+  position: absolute;
+}
+
+.cursor-top {
+  position: absolute;
+  top: 0px;
+  left: calc(50% - 13px);
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 13px solid map-get($palette, black);
+  z-index: 100;
+}
+
+.cursor-bottom {
+  position: absolute;
+  bottom: 0px;
+  left: calc(50% - 13px);
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-bottom: 13px solid map-get($palette, black);
+  z-index: 100;
+}
+
+.cdk-drag-handle {
+  flex: 1;
+}
+
+  // for dragging posinter control in edit recording page
+.pointer-control-container {
+}
+
+.pointer-control {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background-color: map-get($palette, white);
+  outline: none;
+  cursor: pointer;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+}
+
+.custom-tringle {
+  position: absolute;
+  left: -12px;
+  border-right: solid 36px map-get($palette, black);
+  border-bottom: solid 24px transparent;
+  border-top: solid 24px transparent;
+}
+
+.custom-tringle-2 {
+  position: absolute;
+  left: -10px;
+  border-right: solid 36px map-get($palette, white);
+  border-bottom: solid 24px transparent;
+  border-top: solid 24px transparent;
+  z-index: 0;
+}
+
+.time-picker {
+  border-top: solid 1px map-get($palette, green);
+  border-bottom: solid 1px map-get($palette, green);
+  height: 48px;
+  width: 100%;
+  margin-left: 24px;
+  display: flex;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+
+.pose-pointer {
+  height: 48px;
+  width: 133px;
+  border-top: solid 1px map-get($palette, red);
+  border-bottom: solid 1px map-get($palette, red);
+  border-left: solid 1px map-get($palette, red);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.play-record {
+  min-width: 48px;
+  height: 48px;
+  width: 48px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding: 16px 8px;
+}
+
+.pose-container {
+  position: absolute;
+  left: -13px;
+  width: 152px;
+  height: 48px;
+
+  outline: none;
+}
+
+.pose-container-2 {
+  position: relative;
+  height: 48px;
+}
+
+.middle-pose-line:after {
+  content: '';
+  position: absolute;
+  width: 32px;
+  top: 50%;
+  left: 0;
+  border-top: 1px solid map-get($palette, black);
+  transform: translateY(-50%);
+}
+
+.pose-image {
+  position: absolute;
+  right: 48px;
+  width: 72px;
+  height: 46px;
+  border-left: 1px solid map-get($palette, black);
+  border-top: 1px solid map-get($palette, black);
+  border-bottom: 1px solid map-get($palette, black);
+}
+.pose-image-rounded {
+  border-top: map-get($palette, black);
+  border-radius: 6px 6px 0 0;
+}
+
+.pose-close {
+  position: absolute;
+  right: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.overlayed-timeline-top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  opacity: 0.7;
+  background: map-get($palette, white);
+  z-index: 100;
+}
+
+.overlayed-timeline-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  opacity: 0.7;
+  background: map-get($palette, white);
+}

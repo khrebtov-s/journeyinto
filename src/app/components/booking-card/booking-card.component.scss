@@ -1,0 +1,27 @@
+.card {
+    padding: 20px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    app-icon {
+        margin-right: 20px;
+    }
+
+    .content {
+        width: 100%;
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .cta {
+        min-width: 100px;
+    }
+}

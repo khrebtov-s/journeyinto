@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <section class="record">
+    <p>is online: {{audioRecordingService.isOnline}}</p>
+    <p>blobs uploaded (total to date): {{audioRecordingService.blobsUploaded.length}}</p>
+    <p>blobs uploaded (currently on db): {{audioRecordingService.dbBlobsCount}}</p>
+    <h1 class="title-display-3" *ngIf="audioRecordingService.recorder">Recording</h1>
+    <h1 class="title-display-3" *ngIf="!audioRecordingService.recorder">Press to start recording</h1>
+
+    <button class="btn record-stop-btn" type="button" (click)="startStopRecording()">
+      <span *ngIf="audioRecordingService.recorder"></span>
+    </button>
+    <p class="title-display-3" *ngIf="audioRecordingService.recorder">{{ recordedTime }}</p>
+    <button *ngIf="audioRecordingService.recorder"
+      class="btn btn-medium cancel-btn"
+      (click)="openCancelRecordingDialog()">Cancel recording</button>
+  </section>
+</div>

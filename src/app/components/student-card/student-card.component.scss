@@ -1,0 +1,52 @@
+$small-width: 500px;
+
+.card {
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+
+    @media all and (max-width: $small-width) {
+        flex-wrap: wrap;
+    }
+    
+    ::ng-deep app-round-photo {
+        width: 60px;
+    }
+
+    h1 {
+        flex: 1;
+    }
+
+    .cta {
+        display: flex;
+
+        @media all and (max-width: $small-width) {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn {
+            align-self: center;
+            width: 85px;
+
+            @media all and (max-width: $small-width) {
+                width: 100%;
+            }
+        }
+
+        button {
+            margin: 0 20px;
+
+            @media all and (max-width: $small-width) {
+                margin-left: 0;
+            }
+        }
+
+        
+    }
+
+
+    
+
+}

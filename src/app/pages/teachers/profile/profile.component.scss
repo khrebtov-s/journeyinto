@@ -1,0 +1,22 @@
+@import '../../../theme/common/styles.common.scss';
+
+ul {
+    padding-left: 0;
+    a {
+        display: flex;
+    }
+}
+
+.profile-image {
+    position: relative;
+
+    .title-in-picture {
+        color: map-get($palette, white);
+        font-family: 'Futura Std Book', serif;
+        font-size: 40px;
+        font-weight: 300;
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+    }
+}

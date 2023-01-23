@@ -1,0 +1,97 @@
+<ng-container 
+  *ngIf="user && user.view_status === viewStatuses.TEACHER">
+  <app-message [message]="message"></app-message>
+  <div class="wrapper">
+    <!-- Contact details form -->
+    <section>
+      <h1 class="text-display-2">Contact details</h1>
+      <hr>
+      <form [formGroup]="contactDetailsForm" class="form-one">
+        <ng-container *ngIf="contactDetailsForm.get('email'); let email">
+          <app-ji-input 
+              [type]="'email'"
+              [parentForm]="contactDetailsForm"
+              [input]="'email'"
+              [title]="'Email'"
+              [errors]="email.errors"
+              [hasError]="email.invalid && (email.dirty || email.touched)"></app-ji-input>
+        </ng-container>
+        <ng-container *ngIf="contactDetailsForm.get('telephone'); let phone">
+          <app-ji-input 
+              [parentForm]="contactDetailsForm"
+              [input]="'telephone'"
+              [title]="'Mobile telephone'"
+              [errors]="phone.errors"
+              [hasError]="phone.invalid && (phone.dirty || phone.touched)"></app-ji-input>
+        </ng-container>
+        <button
+          mat-ripple
+          type="button"
+          class="btn btn-large btn-rounded bg-20 width-100"
+          [disabled]="contactDetailsForm.invalid"
+          (click)="saveContactDetails()">Save changes</button>
+      </form>
+    </section>
+  
+    <!-- Password form -->
+    <section>
+      <form [formGroup]="passwordForm" class="form-one">
+        <app-password-match-input 
+          formControlName="password"
+          (passwordFormValid)="enableSaveButton($event)"></app-password-match-input>
+        <button 
+          mat-ripple 
+          type="button" 
+          class="btn btn-large btn-rounded bg-20 width-100" 
+          [disabled]="status === requestStatus.pending || pwBtnDisabledState"
+          (click)="savePassword()">Save changes</button>
+      </form>
+    </section>
+  
+    <!-- Personal details form -->
+    <section>
+      <form [formGroup]="personalDetailsForm" class="form-one">
+        <h1 class="text-display-2">Personal details</h1>
+        <hr>
+        <ng-container *ngIf="personalDetailsForm.get('first_name'); let firstName">
+          <app-ji-input 
+              [parentForm]="personalDetailsForm"
+              [input]="'first_name'"
+              [title]="'First name'"
+              [errors]="firstName.errors"
+              [hasError]="firstName.invalid && (firstName.dirty || firstName.touched)"></app-ji-input>
+        </ng-container>
+        <ng-container *ngIf="personalDetailsForm.get('last_name'); let lastName">
+          <app-ji-input 
+              [parentForm]="personalDetailsForm"
+              [input]="'last_name'"
+              [title]="'Last name'"
+              [errors]="lastName.errors"
+              [hasError]="lastName.invalid && (lastName.dirty || lastName.touched)"></app-ji-input>
+        </ng-container>
+        <button
+          mat-ripple
+          type="button"
+          class="btn btn-large btn-rounded bg-20 width-100"
+          [disabled]="personalDetailsForm.invalid"
+          (click)="savePersonalDetails()">Save changes</button>
+      </form>
+    </section>
+  
+    <!-- Payment account details form -->
+    <section class="payments">
+      <h1 class="text-display-2">Your Payment Account</h1>
+      <hr>
+      <p class="text-display-6">We use a third party platform called Stripe to manage subscriptions payments between you and your students.</p>
+      <button class="btn btn-bordered"
+        *ngIf="user?.creator?.stripe_user_id; else completeRegister"
+        (click)="goToStripeDashboard()">Visit your payment information account</button>
+      
+      <ng-template #completeRegister>
+        <app-teacher-stripe-form
+          [introText]="'To enable students to subscribe to you, please set up or link with your existing Stripe account.'"
+          [showForm]="false"></app-teacher-stripe-form>
+      </ng-template>
+    </section>
+  </div>
+</ng-container>

@@ -1,0 +1,13 @@
+export { AuthenticationEffects } from './modules/authentication/authentication.effects';
+export { SignUpEffects } from './modules/sign-up/sign-up.effects';
+export { ForgottenPasswordEffects } from './modules/forgotten-password/forgotten-password.effects';
+export { OnboardingEffects } from './modules/onboarding/onboarding.effects';
+export { TeachersEffects } from './modules/teachers/teachers.effects';
+export { NotificationEffects } from './modules/notification/notification.effects';
+export { UserEffects } from './modules/user/user.effects';
+export { PosesEffects } from './modules/poses/poses.effects';
+export { RecordingEffects } from './modules/recording/recording.effects';
+export { AudioRecordingEffects } from './modules/audio-recording/audio-recording.effects';
+export { StudentsEffects } from './modules/students/students.effects';
+export { CardsEffects } from './modules/cards/cards.effects';
+export { StripeEffects } from './modules/stripe/stripe.effects';

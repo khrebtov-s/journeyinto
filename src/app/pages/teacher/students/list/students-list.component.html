@@ -1,0 +1,25 @@
+<div class="wrapper" *ngIf="!spinner.isShowing.value">
+  <section *ngIf="approved.length > 0">
+    <h1 class="text-display-2">Approved</h1>
+    <ul>
+      <li *ngFor="let student of declined">
+        <app-student-card 
+          [student]="student" 
+          [ctaText]="'Decline'"
+          (studentCtaClicked)="onStudentCtaClicked(student)"></app-student-card>
+      </li>
+    </ul>
+  </section>
+  <section *ngIf="declined.length > 0">
+    <ul>
+      <li *ngFor="let student of declined">
+        <app-student-card 
+          [student]="student"
+          [ctaText]="'Approve'"
+          (studentCtaClicked)="onStudentCtaClicked(student)"></app-student-card>
+      </li>
+    </ul>
+  </section>
+  
+  <p *ngIf="!approved.length && !declined.length">Invite your students to connect or subscribe to you by sharing your personal link at the bottom of your Journey Into profile page. For guides on how to do this, go to <a href="https://www.journeyinto.com/space" target="_blank">https://www.journeyinto.com/space</a></p>
+</div>  

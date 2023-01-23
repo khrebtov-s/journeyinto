@@ -1,0 +1,106 @@
+<div fxLayout="row" fxLayoutAlign="center center">
+    <article fxFlex fxFlex.xs="100" *ngIf="teacher">
+        <div class="profile-image">
+            <img class="width-100" src="{{ teacher.image }}" alt="" />
+            <h1 *ngIf="teacher.show_title" class="title-in-picture spacer">{{ teacher.profile_title }}</h1>
+        </div>
+        <div class="spacer">
+            <section class="info">
+                <p class="text-display-5 m-t-16 ">
+                    {{ teacher.qualifications }}
+                </p>
+                <p class="text-display-5 m-t-16 ">
+                    {{ teacher.city }}
+                </p>
+                <p class="text-display-1  m-t-16">
+                    <a href="mailto:{{ teacher.email }}">{{ teacher.email }}</a> <ng-container *ngIf="teacher.telephone">, <a href="tel:{{ teacher.telephone }}">{{ teacher.telephone }}</a></ng-container>
+                </p>
+            </section>
+
+            <hr class="m-t-26" />
+            
+            <div 
+                class="text-display-3 m-t-30" 
+                [innerHTML]="teacher.description"></div>
+            <!-- <div class="text-center m-t-40 m-b-40" *ngIf="teacher.vimeo_url">
+            </div> -->
+            <section class="text-display-2  m-t-50 m-b-20" *ngIf="teacher.sample_classes?.length">
+                <h1 class="text-display-2  m-t-50 m-b-20">
+                    Sample classes
+                </h1>
+                <article class="card m-b-12" *ngFor="let record of teacher.sample_classes" (click)="gotoRecording(record)">
+                    <img class="width-100" src="{{ record?.thumbnail }}" />
+                    <div class="p-t-18 p-l-18 p-b-18 p-r-18">
+                        <div class="text-display-2" fxFlex="65" fxLayoutAlign="flex-start" fxLayout="column">
+                            <p class="m-b-0 m-t-0 text-display-2">{{ teacher.first_name }}</p>
+                            <h1 class="text-display-6">{{ record?.title }}</h1>
+                        </div>
+                        <div fxFlex="35" fxLayoutAlign="flex-end center">
+                            <button class="btn btn-bordered app-small-btn"
+                                fxLayoutAlign="center right">Listen</button>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+
+
+
+            <section>
+                <h1 class="text-display-2  m-t-50 m-b-20" *ngIf="links?.length">
+                    External links
+                </h1>
+                <hr />
+                <ul class="m-t-10 m-l-0 p-l-0" *ngFor="let link of links">
+                    <li>
+                        <a class="m-t-15 text-display-5" fxFlex="90" href="{{ link.url }}" target="_blank">
+                            <img class="m-r-15" src="assets/img/{{ link?.icon ? link.icon : 'link' }}.png" />
+                            {{ link?.label }}
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+
+
+            
+            <!-- <div class="text-center m-t-24">
+                <div class="m-t-12" *ngIf="!userId">
+                    <button mat-ripple class="btn btn-rounded app-large-btn" (click)="connectToTeacher()">
+                        Connect with {{ teacher.first_name }}
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="userId && canSubscribe">
+                    <button mat-ripple class="btn btn-rounded app-large-btn" (click)="subscribeToTeacher()">
+                        Subscribe to {{ teacher.first_name }}
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="userId && canUnsubscribe">
+                    <button mat-ripple class="btn btn-rounded app-large-btn" (click)="unsubscribeOfTeacher()">
+                        Unsubscribe from {{ teacher.first_name }}
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="!userId">
+                    <button mat-ripple class="btn btn-rounded app-large-btn">
+                        Sign up to subscribe to {{ teacher.first_name }}
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="!userId">
+                    <button [routerLink]="['/signup']" mat-ripple class="btn btn-rounded app-large-btn">
+                        Sign up to connect with {{ teacher.first_name }}
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="canEdit">
+                    <button routerLink="/teacher/{{ userId }}/profile-edit" mat-ripple
+                        class="btn btn-rounded app-large-btn">
+                        Edit profile
+                    </button>
+                </div>
+                <div class="m-t-12" *ngIf="canBooking">
+                    <button mat-ripple class="btn btn-rounded app-large-btn">Go to booking slots</button>
+                </div>
+            </div>
+                -->
+        </div>
+    </article>
+</div>

@@ -1,0 +1,30 @@
+@import '../../common/styles.common';
+
+// Create custom palette for angular material
+@import '~@angular/material/theming';
+
+$palette-primary: (
+  500: map-get($palette, black),
+  contrast: ()
+);
+
+$palette-accent: (
+  500: map-get($palette, 90),
+  contrast: ()
+);
+
+$custom-typography: mat-typography-config(
+  $font-family: '"Futura Std Medium", sans-serif;'
+);
+@include mat-core($custom-typography);
+
+$custom-theme: (
+  primary: mat-palette($palette-primary),
+  accent: mat-palette($palette-accent),
+  warn: mat-palette($mat-red),
+  is-dark: false,
+  foreground: $mat-light-theme-foreground,
+  background: $mat-light-theme-background
+);
+
+@include angular-material-theme($custom-theme);

@@ -1,0 +1,25 @@
+section {
+    margin-top: 40px;
+
+    &.audio-element {
+        margin-top: 24px;
+        text-align: center;
+    }
+}
+
+audio {
+    outline: none;
+}
+
+.cta {
+    margin-top: 30px;
+    
+    .two-col-btns {
+        margin-top: 30px;
+    }
+}
+
+.no-edit-message {
+    margin-top: 20px;
+    text-align: center;
+}

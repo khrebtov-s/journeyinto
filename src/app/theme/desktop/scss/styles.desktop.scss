@@ -1,0 +1,37 @@
+// Normalize and reset all styles
+@import '~normalize.css';
+
+// Add custom fonts
+@font-face {
+  font-family: 'Futura Std Medium';
+  src: url(../../common/fonts/futura_std_medium.otf);
+}
+@font-face {
+  font-family: 'Futura Std Light';
+  src: url(../../common/fonts/futura-std_light.otf);
+}
+
+@font-face {
+  font-family: 'Futura Std Book';
+  src: url(../../common/fonts/futura_std_book.otf);
+}
+
+// Overlap angular material
+@import './angular-material.theme';
+
+// Import custom common styles
+@import '../../common/styles.common';
+@import './components/colors.desktop';
+@import './components/typography.desktop';
+@import './components/helpers.desktop';
+@import './components/spacer.desktop';
+@import './components/forms.desktop';
+@import './components/buttons.desktop';
+@import './components/misc.desktop';
+@import './components/card.desktop';
+@import './components/stripe.desktop';
+@import './components/modals.desktop';
+
+* {
+  box-sizing: border-box;
+}

@@ -1,0 +1,12 @@
+@import '../../../common/styles.common';
+.card {
+  border: 1px solid map-get($palette, 70);
+  border-radius: 6px;
+  box-shadow: none;
+  overflow: hidden;
+
+  img {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+}

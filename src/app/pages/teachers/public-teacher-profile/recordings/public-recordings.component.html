@@ -1,0 +1,9 @@
+<div class="wrapper">
+    <ul class="teachers-recordings">
+        <li *ngFor="let recording of recordings">
+            <app-class-card 
+                [singleClass]="recording"
+                [teacher]="teacher"></app-class-card>
+        </li>
+    </ul>
+</div>

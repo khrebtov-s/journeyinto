@@ -1,0 +1,8 @@
+<fieldset [formGroup]="parentForm">
+    <mat-checkbox 
+        color="primary" 
+        formControlName="{{name}}">
+        <ng-content></ng-content>
+    </mat-checkbox>
+    <p *ngIf="hasError">This field must be checked in order to submit the form.</p>
+</fieldset>

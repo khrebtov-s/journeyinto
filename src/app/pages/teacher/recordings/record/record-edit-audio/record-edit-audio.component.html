@@ -1,0 +1,115 @@
+<div class="wrapper" *ngIf="!spinner.isShowing.value">
+  <div class="timerWrapper" *ngIf="recording?.file_item; else noAudioFile">
+    <p>Length: {{audioDuration}}</p>
+    <p *ngIf="!isAudioLoaded">Loading...</p>
+    <div fxFlex.xs="100" *ngIf="isAudioLoaded">
+      <div fxLayout="row" class="m-t-20" style="position: relative;" *ngIf="!isAddingPose">
+        <div class="overlayed-timeline-top" [ngStyle]="{ 'height.px': overlayedTopAreaHeight }"></div>
+        <div fxFlex="14">
+          <div fxFlex="50" class="timeline-time" [ngStyle]="{ 'height.px': timelineHeight }">
+            <div class="time-tick" *ngFor="let tick of timelineTicks" [ngStyle]="{ 'top.px': tick.tickPosition }">
+              <div class="text-display-8">{{ tick.tickTime }}</div>
+            </div>
+          </div>
+          <div fxFlex="50" class="timeline" [ngStyle]="{ 'height.px': timelineHeight }">
+            <div class="middle-timeline"></div>
+            <div class="line-tick" *ngFor="let tick of timelineTicks" [ngStyle]="{ 'top.px': tick.tickPosition }"></div>
+            <div class="line-tick" [ngStyle]="{ 'bottom.px': pointerControlHeight / 2 }"></div>
+            <div class="cursor-top pointer" cdkDragLockAxis="y" (cdkDragEnded)="onMovedCursorTop($event)"
+              cdkDragBoundary=".timeline" cdkDrag></div>
+            <div class="cursor-bottom pointer" cdkDragLockAxis="y" (cdkDragEnded)="onMovedCursorBottom($event)"
+              cdkDragBoundary=".timeline" cdkDrag></div>
+          </div>
+        </div>
+        <div fxFlex="86" class="pointer-control-container" [ngStyle]="{ 'height.px': timelineHeight }"
+          style="position: relative">
+          <div class="pointer-control" cdkDragLockAxis="y" cdkDragBoundary=".pointer-control-container"
+            (cdkDragEnded)="onSetAudioCurrentTime($event)" [cdkDragFreeDragPosition]="positionPointerControl" cdkDrag>
+            <div cdkDragHandle>
+              <div class="custom-tringle"></div>
+              <div class="custom-tringle-2"></div>
+              <div class="time-picker text-display-8">
+                {{ currentPosition * factor | minuteSeconds }}
+              </div>
+            </div>
+            <div class="pose-pointer" (click)="onAddPose()">
+              <button class="btn add-btn"></button> Add pose
+            </div>
+            <button class="btn play-record" (click)="onPlayPauseRecord()">
+              <svg width="14" height="20" *ngIf="audio.paused">
+                <image xlink:href="/assets/img/play-2_icon.svg" width="14" height="20" />
+              </svg>
+              <svg width="20" height="20" *ngIf="!audio.paused">
+                <image xlink:href="/assets/img/pause-2_icon.svg" width="20" height="20" />
+              </svg>
+            </button>
+          </div>
+          <div class="pose-container" *ngFor="let pose of timelinePoses" [ngStyle]="{ 'top.px': pose.timestamp }">
+            <div class="pose-container-2">
+              <div class="middle-pose-line"></div>
+              <div class="pose-image text-center">
+                <img [src]="pose.pose.thumbnail" height="46px" alt="" />
+              </div>
+              <button class="btn pose-close bg-white btn-bordered" fxLayoutAlign="center center"
+                (click)="onDeletePose(pose)">
+                <svg width="24" height="24" *ngIf="audio.paused">
+                  <image xlink:href="/assets/img/close_icon.svg" width="24" height="24" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="overlayed-timeline-bottom" [ngStyle]="{ 'height.px': overlayedBottomAreaHeight }"></div>
+      </div>
+      <div class="width-100 m-t-40" fxLayout="row" *ngIf="!isAddingPose">
+        <button mat-ripple class="btn btn-bordered m-r-18" (click)="onCancelEditRecording()">Cancel</button>
+        <button mat-ripple class="btn" (click)="onSaveEditRecording()">Save</button>
+      </div>
+      <div fxLayout="column" class="m-t-30" *ngIf="isAddingPose">
+        <div class="m-t-20">
+          <div fxLayout="row">
+            <div class="text-display-4">{{ currentPosition | minuteSeconds }}</div>
+          </div>
+          <div fxLayout="row">
+            <select class="input-search-select-bordered m-t-7 width-100" [ngModel]="selectedPose"
+              (ngModelChange)="onChangeSelectedPose($event)">
+              <option value="" disabled selected hidden>Search</option>
+              <option [ngValue]="pose" *ngFor="let pose of poses">
+                {{ pose.title }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="m-t-60">
+          <div fxLayout="column">
+            <div class="m-t-36" fxLayoutAlign="center center">
+              <button mat-ripple type="button" class="btn btn-large btn-rounded bg-20 width-100" [disabled]="!currentPose"
+                (click)="onSavePose()">
+                Save pose
+              </button>
+            </div>
+            <div fxLayoutAlign="center center" class="m-t-20">
+              <button mat-ripple type="button" class="btn btn-large btn-rounded bg-20 width-100"
+                (click)="onCancelAddPose()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noAudioFile>
+  <div class="wrapper no-recording-file">
+    <p 
+      *ngIf="recording?.status !== recordingStatus.FAILED">The file you are trying to edit is still uploading, please try again later.</p>
+    <p 
+      *ngIf="recording?.status === recordingStatus.FAILED">The file you are trying to edit has failed uploading, please delete this one are try recording a new class.</p>
+
+    <a *ngIf="recording?.slug && recording?.status !== recordingStatus.FAILED"
+      class="btn"
+      [routerLink]="[ '/', routeNames.teacher, routeNames.recordings, recording?.slug, routeNames.editRecording ]">Edit class details</a>
+    <a *ngIf="recording?.slug"
+      class="btn btn-bordered"
+      [routerLink]="[ '/', routeNames.teacher, routeNames.recordings, recording?.slug ]">Cancel edit</a>
+  </div>
+</ng-template>

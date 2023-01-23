@@ -1,0 +1,28 @@
+<mat-sidenav-container [ngClass]="{
+  'menu-open': sidenavOpen 
+}">
+  <mat-sidenav 
+    class="menu-header"
+    fixedInViewport="true"
+    #sidenav>
+    <app-menu
+      [user]="user"
+      (switchUserViewStatus)="onSwitchUserViewStatus($event)"
+      (sidenavClose)="onCloseSideNav()"
+      (logout)="onLogout()"
+      [hidePrivateMenuItems]="hideNav"
+    ></app-menu>
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <app-layout-default-header 
+      (switchUserViewStatus)="onSwitchUserViewStatus($event)"
+      [hideNav]="hideNav"
+      [user]="user"
+      (sidenavToggle)="onSidenavToggle()">
+    </app-layout-default-header>
+    <router-outlet></router-outlet>
+    <!-- <app-layout-default-footer 
+      *ngIf="!hideNav"
+      [user]="user"></app-layout-default-footer> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,30 @@
+@import '../../../common/styles.common';
+.StripeElement {
+  padding: 14px 20px 14px 20px;
+
+  border-radius: 6px;
+  border: 1px solid map-get($palette, 100);
+  background-color: map-get($palette, white);
+  // box-shadow: 0 1px 3px 0 map-get($palette, 70);
+  box-shadow: none;
+
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  // box-shadow: 0 1px 3px 0 map-get($palette, 30);
+  box-shadow: none;
+}
+
+.StripeElement--invalid {
+  border-color: map-get($palette, error);
+}
+
+.StripeElement--webkit-autofill {
+  background-color: map-get($palette, 80) !important;
+}
+
+.card-errors {
+  color: map-get($palette, error);
+}

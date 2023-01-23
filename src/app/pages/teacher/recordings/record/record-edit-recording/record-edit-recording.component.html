@@ -1,0 +1,79 @@
+<div class="wrapper" *ngIf="!spinner.isShowing.value">
+  <app-message [message]="message"></app-message>
+  <section class="audio-element">
+    <audio *ngIf="blobUrl" controls controlsList="nodownload">
+      <source [src]="blobUrl" type="audio/webm" />
+      <source [src]="blobUrl" type="audio/mpeg" />
+    </audio>
+  </section>
+  <section>
+    <form [formGroup]="recordClassForm"
+      class="form-one">
+      <ng-container *ngIf="recordClassForm.get('title'); let title">
+        <app-ji-input 
+            [parentForm]="recordClassForm" 
+            [input]="'title'" 
+            [title]="'Title'"
+            [errors]="title.errors"
+            [hasError]="title.invalid && (title.dirty || title.touched)"></app-ji-input>
+      </ng-container>
+      <ng-container *ngIf="recordClassForm.get('description'); let description">
+        <app-ji-input 
+            [parentForm]="recordClassForm" 
+            [input]="'description'" 
+            [title]="'Description'"
+            [errors]="description.errors"
+            [hasError]="description.invalid && (description.dirty || description.touched)"></app-ji-input>
+      </ng-container>
+      <ng-container *ngIf="recordClassForm.get('difficulty'); let difficulty">
+        <app-ji-input 
+            [parentForm]="recordClassForm" 
+            [input]="'difficulty'" 
+            [title]="'Level'"
+            [errors]="difficulty.errors"
+            [hasError]="difficulty.invalid && (difficulty.dirty || difficulty.touched)"></app-ji-input>
+      </ng-container>
+      <ng-container *ngIf="recordClassForm.get('props'); let props">
+        <app-ji-input 
+            [parentForm]="recordClassForm"
+            [type]="'textarea'"
+            [input]="'props'" 
+            [title]="'Props'"
+            [errors]="props.errors"
+            [hasError]="props.invalid && (props.dirty || props.touched)"></app-ji-input>
+      </ng-container>
+      <ng-container *ngIf="recordClassForm.get('is_fixed'); let is_fixed">
+        <app-ji-checkbox 
+          [parentForm]="recordClassForm"
+          [name]="'is_fixed'">
+          Is sample class
+        </app-ji-checkbox>
+      </ng-container>
+
+      <div class="cta">
+        <button
+            mat-ripple
+            type="button"
+            class="btn"
+            (click)="handleSubmitClick()"
+            [disabled]="recordClassForm.invalid || submitDisabled">Save to Library</button>
+        <div class="two-col-btns">
+          <button
+            mat-ripple
+            class="btn btn-bordered"
+            (click)="openDeleteRecordingDialog()">Delete</button>
+          <button
+            mat-ripple
+            class="btn btn-bordered"
+            [disabled]="!recordingId || !recording?.file_item"
+            (click)="onEditAudioBtnClick()">
+              Edit Recording
+              <span *ngIf="!recording?.file_item">*</span>
+            </button>
+        </div>
+        <p class="no-edit-message text-display-6" 
+          *ngIf="!recording?.file_item">*You cannot edit the recording file at the moment as it has not finished uploading.</p>
+      </div>
+    </form>
+  </section>
+</div>

@@ -1,0 +1,72 @@
+<div class="wrapper" *ngIf="creator && !spinner.isShowing.value">
+  <section *ngIf="isSubscribedUser">
+    <h1 class="text-display-2">All classes</h1>
+    <ul *ngIf="teacherClasses.length > 0; else noTeacherClasses">
+      <li *ngFor="let userClass of teacherClasses">
+        <app-class-card 
+          [singleClass]="userClass"
+          [teacher]="creator"></app-class-card>
+      </li>
+    </ul>    
+
+    <ng-template #noTeacherClasses>
+      <p>Sorry, your teacher hasn't added any classes yet.</p>
+    </ng-template>
+  </section>
+  
+  <!-- if not subscribed -->
+  <ng-container *ngIf="!isSubscribedUser">
+    <section class="subscribe-cta">
+      <h1 class="text-display-2">Why subscribe?</h1>
+      <hr>
+      <p>Your teacher is creating new content every week so you can practice anywhere, any time with the support of their familiar phrasing and sequences.</p>
+
+      <button 
+        mat-ripple 
+        class="btn"
+        (click)="subscribeToTeacher()">Subscribe to {{creator.first_name}} for {{creator.product.cost | currency : creator.currency.toUpperCase()}} a {{ creator.product.frequency }}</button>
+    </section>
+  
+    <!-- Teachers classes -->
+    <section>
+      <h1 class="text-display-2">Your latest classes</h1>
+      <ul *ngIf="teacherClasses.length; else emptyTeacherClasses">
+        <li *ngFor="let class of teacherClasses">
+          <app-class-card 
+            [teacher]="creator"
+            [singleClass]="class"
+            [customContent]="true">
+            <div class="two-col-btns"
+              *ngIf="!class.is_bought">
+              <!-- <a class="btn btn-small btn-bordered"
+                (click)="subscribeToTeacher(class)">Buy for £5.00</a> -->
+              <a class="btn btn-small btn-bordered"
+                (click)="subscribeToTeacher()">Subscribe for {{creator.product.cost | currency: creator.currency.toUpperCase() }}</a>
+            </div>
+            <a class="btn btn-small btn-bordered"
+                *ngIf="class.is_bought"
+                [routerLink]="['/', routeNames.teachers, creator.slug, routeNames.recordings, class.slug]">Practice</a>
+          </app-class-card>
+        </li>
+      </ul>
+      <ng-template #emptyTeacherClasses>
+        <p>Your teacher has no classes.</p>
+      </ng-template>
+    </section>
+
+    <section>
+      <!-- Sample classes -->
+      <h1 class="text-display-2">Sample class</h1>
+      <ul *ngIf="sampleClasses.length; else emptySampleClasses">
+        <li *ngFor="let class of sampleClasses">
+          <app-class-card 
+            [singleClass]="class"
+            [teacher]="creator"></app-class-card>
+        </li>
+      </ul>
+      <ng-template #emptySampleClasses>
+        <p>Your teacher has no sample classes.</p>
+      </ng-template>
+    </section>
+  </ng-container>
+</div>

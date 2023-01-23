@@ -1,0 +1,53 @@
+@import '../../../theme/common/styles.common.scss';
+
+fieldset {
+  margin-top: 30px;
+
+  p {
+    margin-bottom: 0;
+    margin-top: 20px;
+    color: map-get($palette, error);
+  }
+}
+
+// Checkbox
+fieldset ::ng-deep .mat-checkbox {
+  display: flex;
+
+  .mat-checkbox-layout {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    white-space: normal;
+  }
+
+  .mat-checkbox-label {
+    color: map-get($palette, black);
+    font-family: 'Futura Std Light', serif;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.44px;
+    line-height: 28px;
+    margin-left: 6px;
+  }
+
+  .mat-checkbox-inner-container {
+    display: inline-block;
+    height: 28px;
+    line-height: 0;
+    // margin: auto;
+    margin-right: 8px;
+    order: 0;
+    position: relative;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 28px;
+    flex-shrink: 0;
+  }
+
+  .mat-checkbox-frame {
+    border-radius: 6px;
+    border: 1px solid map-get($palette, 100);
+    background-color: map-get($palette, white);
+  }
+}

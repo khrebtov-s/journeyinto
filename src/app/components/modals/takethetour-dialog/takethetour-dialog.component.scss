@@ -1,0 +1,332 @@
+@import '../../../theme/common/styles.common.scss';
+
+$small: 420px;
+$medium: 680px;
+
+$small-height: 450px;
+
+::ng-deep .cdk-overlay-pane.takethetour-modal {
+    max-width: 500px!important;
+    
+    .mat-dialog-actions {
+        margin-bottom: 0;
+        padding: 0;
+        min-height: initial;
+
+        justify-content: center;
+
+        button {
+            @media all and (max-height: $small-height), (max-width: $small) {
+                padding: 10px 20px;
+            }
+        }
+
+        .skip-btn {
+            display: inline-block;
+            padding: 20px 20px 0 20px;
+        }
+    }
+
+    .mat-dialog-content {
+        margin: 0;
+        padding: 0;
+        max-height: initial;
+    }
+
+    .mat-stepper-horizontal {
+        position: relative;
+    }
+
+    .mat-dialog-container {
+        @media all and (max-width: $small) {
+            height: calc(100vh - 50px);
+            padding-bottom: 40px;
+            border-radius: 0;
+        }
+    }
+
+    .mat-horizontal-content-container {
+        padding: 0;
+    }
+
+    // STEPS
+    .mat-horizontal-stepper-header-container {
+        position: absolute;    
+        bottom: 0;
+
+        width: 100%;
+        height: 60px;
+        justify-content: center;
+
+        background-color: map-get($palette, white);
+
+        @media all and (max-height: $small-height), (max-width: $small) {
+            height: 40px
+        }
+
+        .mat-horizontal-stepper-header {
+            height: auto;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        .mat-step-label,
+        .mat-stepper-horizontal-line,
+        .mat-step-icon-content {
+            display: none;
+        }
+
+        .mat-step-icon {
+            margin-right: 0;
+            margin: 0 2px;
+            width: 10px;
+            height: 10px;
+            background-color: map-get($palette, white);
+            border: solid 1px map-get($palette, black);
+        }
+
+        .mat-step-icon-selected {
+            background-color: map-get($palette, black);
+        }
+    }
+
+    .mat-horizontal-stepper-content  {
+        .step-content {
+            margin-bottom: 60px;
+            padding: 20px;
+            padding-bottom: 0;
+
+            text-align: center;
+
+            @media all and (max-height: $small-height) {
+                margin-bottom: 40px;
+                padding-top: 0;
+            }
+            
+            @media all and (max-width: $small) {
+                margin-bottom: 40px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            .step-text {
+                height: 200px;
+                overflow-y: auto;
+
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+
+                // @media all and (max-height: $small-height) {
+                //     height: calc(100vh - 60px - 90px - 80px);
+                // }
+
+                @media all and (max-width: $small) {
+                    height: calc(100vh - 250px);
+                }
+
+                a {
+                    text-decoration: underline;
+                }
+
+                .learn-more-link {
+                    margin-top: 40px;
+                }
+
+                p:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            .step-body {
+                img {
+                    display: block;
+                    max-width: 100%;
+                    height: auto;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+
+// ::ng-deep .mat-dialog-container {
+//     padding: 20px;
+//     overflow: visible;
+//     position: relative;
+
+//     .step-content {
+//         .step-text {
+//             a {
+//                 text-decoration: underline;
+//             }
+
+//             .learn-more-link {
+//                 margin-top: 40px;
+//             }
+//         }
+//     }
+// }
+
+// .mat-dialog-content {
+//     text-align: center;
+//     padding: 0;
+//     margin: 0;
+
+//     width: 500px;
+
+//     @media all and (max-width: $medium) {
+//         width: 100%;
+//         margin: auto;
+//     }
+// }
+
+// .mat-dialog-actions {
+//     display: flex;
+//     justify-content: center;
+//     margin-bottom: 0;
+//     padding-top: 40px;
+// }
+
+// .step-content {
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+
+//     height: calc(100vh - 250px);
+//     padding: 0 40px;
+
+//     @media all and (max-width: $small) {
+//         padding: 0;
+//     }
+
+//     img {
+//         max-width: 250px;
+//     }
+
+//     img,
+//     .step-text {
+//         width: 80%;
+//         margin: auto;
+//     }
+
+//     .step-text {
+//         h1 {
+//             margin-bottom: 15px;
+//         }
+
+//         a{
+//             color: map-get($palette, error);
+//         }
+//     }
+// }
+
+// /************************ 
+// *** STEPPER OVERRIDES ***
+// ************************/
+// .mat-dialog-content ::ng-deep {
+//     .mat-stepper-horizontal {
+//         display: flex;
+//         flex-direction: column;
+//     }
+    
+//     .mat-horizontal-stepper-header-container {
+//         padding: 15px 0;
+//         order: 2;
+//         justify-content: center;
+//     }
+    
+//     .mat-step-header.mat-horizontal-stepper-header {
+//         padding: 0;
+//         height: 100%;
+//     }
+    
+//     .mat-step-icon-content {
+//         display: none;
+//     }
+    
+//     .mat-step-header .mat-step-icon,
+//     .mat-step-header .mat-step-icon-state-done,
+//     .mat-step-header .mat-step-icon-state-edit {
+//         background-color: map-get($palette, white);
+//         border: solid 1px map-get($palette, black);
+//         width: 10px;
+//         height: 10px;
+//     }
+    
+//     .mat-step-header .mat-step-icon-selected {
+//         background-color: map-get($palette, black);
+//     }
+    
+//     .mat-stepper-horizontal-line,
+//     .mat-step-label,
+//     .mat-step-header .mat-step-header-ripple {
+//         display: none;
+//     }
+
+//     .mat-step-header.cdk-keyboard-focused, 
+//     .mat-step-header.cdk-program-focused, 
+//     .mat-step-header:hover {
+//         background-color: transparent;
+//     }
+
+//     .mat-horizontal-stepper-header {
+//         pointer-events: none;
+
+//         &:last-child {
+//             .mat-step-icon {
+//                 margin-right: 0;
+//             }
+//         }
+//     }
+
+//     .mat-horizontal-content-container {
+//         padding: 0 0 24px;
+//     }
+// }
+
+// /* Mobile Styling  */
+// ::ng-deep .takethetour-modal {
+//     @media all and (max-width: $small) {
+//         max-width: 100vw!important;
+//     }
+
+//     .mat-dialog-container {
+//         @media all and (max-width: $medium) {
+//             width: 80vw;
+//         }
+
+//         @media all and (max-width: $small) {
+//             width: 100vw;
+//             height: 100vh;
+//             border-radius: 0;
+
+//             takethetour-dialog {
+//                 // padding-top: 80px; //because phone screens have that extra bar that otherwise hides the top
+//                 height: calc(100% - 40px - 100px);
+//                 position: absolute;
+//                 width: calc(100% - 40px);
+//                 display: flex;
+//                 flex-direction: column;
+//             }
+
+//             .mat-dialog-content {
+//                 padding-top: 3px;
+//                 height: 100%;
+//                 position: relative;
+
+//                 .mat-stepper-horizontal {
+//                     height: 100%;
+//                     justify-content: space-between;
+//                 }
+//             }
+
+//             .mat-dialog-actions {
+//                 min-height: initial;
+//                 padding-top: 20px;
+//             }
+//         }
+//     }
+// }

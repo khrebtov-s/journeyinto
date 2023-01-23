@@ -1,0 +1,152 @@
+<mat-toolbar class="menu-nav">
+  <a class="home-link" 
+    routerLink="/">
+    <img class="home-link__logo" src="/assets/img/logo.svg" alt="" width="45" height="45" />
+  </a>
+  <button (click)="handleClickCloseSideNav()" class="btn close-menu-btn"></button>
+</mat-toolbar>
+
+<mat-nav-list style="padding-top: 0;" *ngIf="user">
+  <div fxLayout="column" fxLayoutGap="24px" fxLayoutAlign="center">
+    <div *ngIf="user?.view_status === viewStatus.TEACHER" class="menu-list-wrapper">
+      <ng-container *ngIf="!hidePrivateMenuItems">
+        <a mat-list-item 
+          *ngIf="user?.creator?.slug"
+          [routerLink]="['/', routeNames.teacher, routeNames.profile]"
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>Profile</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a>
+        <a mat-list-item 
+          [routerLink]="['/', routeNames.teacher, routeNames.students ]" 
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>My Students</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a>
+        <!-- <a mat-list-item 
+          [routerLink]="['/', routeNames.notifications]" 
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>Notifications</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a> -->
+        <a mat-list-item 
+          [routerLink]="['/', routeNames.teacher, routeNames.account]" 
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>My Account</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a>
+        <a mat-list-item 
+          [routerLink]="['/', routeNames.teacher, routeNames.addClass]" 
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>Add a new class</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a>
+        <a mat-list-item 
+          [routerLink]="['/', routeNames.poses]" 
+          [routerLinkActive]="activeLinkClass" 
+          (click)="handleClickCloseSideNav()">
+          <span>Postures</span>
+          <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+        </a>
+      </ng-container>
+      <a mat-list-item href="https://journeyinto.com/about" target="_blank">
+        <span>About</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+      <!-- <a mat-list-item href="mailto:hello@journeyinto.com" target="_blank">
+        <span>Contact us</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a> -->
+      <a mat-list-item href="https://journeyinto.com/howto" target="_blank">
+        <span>How to</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+    </div>
+
+    <div *ngIf="user.view_status === viewStatus.STUDENT" class="menu-list-wrapper">
+      <!-- <a mat-list-item 
+        [routerLink]="['/', routeNames.teachers]"
+        [routerLinkActive]="activeLinkClass"
+        [routerLinkActiveOptions]="{ exact: true }"   
+        (click)="handleClickCloseSideNav()">
+        <span>Teachers</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a> -->
+      <a mat-list-item 
+        *ngIf="this.user.creators && this.user.creators[0]?.creator?.slug" 
+        [routerLink]="['/', routeNames.teachers, this.user.creators[0].creator.slug ]"
+        [routerLinkActive]="activeLinkClass"
+        (click)="handleClickCloseSideNav()">
+        <span>My Teacher</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+      <!-- <a mat-list-item 
+        [routerLink]="['/', routeNames.notifications]" 
+        [routerLinkActive]="activeLinkClass" 
+        (click)="handleClickCloseSideNav()">
+        <span>Notifications</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a> -->
+      <a mat-list-item 
+        [routerLink]="['/', routeNames.student, routeNames.account]" 
+        [routerLinkActive]="activeLinkClass" 
+        (click)="handleClickCloseSideNav()">
+        <span>My Account</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+      <a mat-list-item 
+        [routerLink]="['/', routeNames.poses]" 
+        [routerLinkActive]="activeLinkClass" 
+        (click)="handleClickCloseSideNav()">
+        <span>Postures</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+      <!-- <a mat-list-item href="https://journeyinto.com/howto" target="_blank">
+        <span>How to</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a> -->
+      <a mat-list-item href="https://journeyinto.com/about" target="_blank">
+        <span>About</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a>
+      <!-- <a mat-list-item href="mailto:hello@journeyinto.com" target="_blank">
+        <span>Contact us</span>
+        <app-icon [width]="18" [icon]="'arrow_right'"></app-icon>
+      </a> -->
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div class="btn btn-bordered switch-btn-content">
+        <button
+          (click)="handleClickSwitchUserViewStatus(viewStatus.STUDENT)"
+          class="switch-btn switch-1"
+          [ngClass]="{ 
+            'active-btn': user?.view_status === viewStatus.TEACHER 
+          }">{{ studentSwitchTitle ? studentSwitchTitle : 'Yoga view'}}</button>
+        <button
+          (click)="handleClickSwitchUserViewStatus(viewStatus.TEACHER)"
+          class="switch-btn switch-2"
+          [ngClass]="{ 
+            'active-btn': user?.view_status === viewStatus.STUDENT 
+          }">{{ teacherSwitchTitle ? teacherSwitchTitle : 'Teacher view'}}</button>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <a href="https://journeyinto.com/termsandconditions" target="_blank">Terms & Conditions</a>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <a href="mailto:hello@journeyinto.com" target="_blank">Contact Us</a>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <a href="https://journeyinto.com/privacypolicy" target="_blank">Privacy</a>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center">
+      <button class="btn logout-btn" (click)="handleLogoutClick()">Logout</button>
+    </div>
+  </div>
+</mat-nav-list>

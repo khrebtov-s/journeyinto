@@ -1,0 +1,61 @@
+<div class="wrapper" *ngIf="creator">
+  <ng-container *ngIf="!isSubscribed && !hasBoughtClass">
+    <section>
+      <h1 class="text-display-5">Subscribing to</h1>
+      <ng-container *ngIf="creator && creator.product">
+        <app-teacher-card 
+          [classBought]="classBought"
+          [subscribeTo]="classBought ? '1 class for £5.00' : '1 ' + creator.product.frequency + ' recurring subscription for ' + (creator.product.cost | currency: creator.currency.toUpperCase())"
+          [large]="true"
+          [teacher]="creator"></app-teacher-card>
+      </ng-container>
+      <ng-container *ngIf="creator && !creator.product">
+        <app-teacher-card 
+          [classBought]="classBought"
+          [subscribeTo]="'1 recurring subscription'"
+          [large]="true"
+          [teacher]="creator"></app-teacher-card>
+      </ng-container>
+    </section>
+
+    <section>
+      <h1 class="text-display-5">Payment</h1>
+      <ul class="payment-cards" 
+        *ngIf="cards && cards.length >= 0">
+        <li *ngFor="let card of cards">
+          <app-payment-card 
+            [card]="card"
+            [customCtaContent]="true">
+            <button class="btn btn-bordered btn-small"
+              (click)="subscribeWithExistingCard(card)">Use this card</button>
+          </app-payment-card>
+        </li>
+      </ul>
+      <app-card-button 
+        *ngIf="slug"
+        [slug]="slug"
+        [recording]="classBought"></app-card-button>
+    </section>
+  </ng-container>
+  <ng-container *ngIf="isSubscribed || hasBoughtClass">
+    <app-complete *ngIf="hasBoughtClass"
+      [title]="'Payment confirmed'"
+      [description]="
+        'Your purchase was successful. You can access your class on the \'My Practice\' section of the app.'
+      "
+      [doOnboarding]="false"
+      [icon]="'check'"
+      [isSubscription]="true"
+    ></app-complete>
+    <app-complete *ngIf="isSubscribed"
+      [title]="'You are subscribed!'"
+      [description]="
+        'Now you can practice with your teacher any time, anywhere. To access your teacher’s content on IOS'"
+      [descriptionLine2]="'To access your teacher’s content on Android or Web'"
+      [downloadBtn]="true"
+      [doOnboarding]="false"
+      [icon]="'check'"
+      [isSubscription]="true"
+    ></app-complete>
+  </ng-container>
+</div>

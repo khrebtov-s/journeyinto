@@ -1,0 +1,99 @@
+.mat-slider.recording-slider.mat-accent .mat-slider-track-fill,
+.mat-slider.recording-slider .mat-slider-track-background,
+.mat-slider.recording-slider .mat-slider-thumb {
+  background-color: map-get($palette, black);
+}
+
+.mat-tab-group.app-tabs .mat-tab-header {
+  display: none;
+}
+
+.mat-dialog-actions.confirm-buttons-container {
+  margin-bottom: 0;
+  padding: 0;
+  min-height: 48px;
+}
+.active-card {
+  background-color: map-get($palette, 60);
+  height: 50px;
+}
+
+
+
+
+.wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 1px;
+  
+  @media all and (max-width: 600px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.top-block {
+  margin-top: 24px;
+}
+
+.wrapper-full {
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 1px;
+}
+
+.spacer {
+  padding: 0 16px 0 16px;
+}
+
+.wrapper-bg {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.wrapper-bg:after {
+  content: '';
+  background: map-get($palette, white) url(/assets/img/photo_2019-09-24_15-31-01.jpg) no-repeat center center;
+  background-size: cover;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
+.active-link {
+  border-bottom: 2px solid map-get($palette, black);
+}
+
+.input-search-select-bordered {
+  display: inline-flex;
+  align-items: baseline;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px 14px;
+  color: map-get($palette, 110);
+  font-family: 'Futura Std Light', serif;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 22px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url(/assets/img/select_dropdown_arrow_icon.svg);
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  border-radius: 6px;
+  border: 1px solid map-get($palette, 100);
+  background-color: map-get($palette, white);
+
+  &:focus {
+    outline: none;
+  }
+}

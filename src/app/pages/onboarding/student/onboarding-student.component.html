@@ -1,0 +1,23 @@
+<ng-container *ngIf="user && user.view_status === viewStatuses.STUDENT">
+  <ng-container *ngIf="!isCompleted">
+    <div class="wrapper">
+      <section class="search-header">
+        <h1 class="title-display-1">Find your Teacher</h1>
+        <p class="title-display-2">Type your teacher’s name. If you do not have a teacher, select from the list below.</p>
+      </section>
+  
+      <section>
+        <app-errors [errors]="errors"></app-errors>
+        <app-teacher-search
+          [selectable]="true"></app-teacher-search>
+      </section>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="isCompleted">
+    <app-complete
+      [title]="'Thank you for registering'"
+      [description]="'Subscribe to your teachers content and book their classes'"
+      [icon]="'logo-header'"></app-complete>
+  </ng-container>
+</ng-container>

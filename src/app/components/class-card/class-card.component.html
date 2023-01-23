@@ -1,0 +1,97 @@
+<div class="card" *ngIf="singleClass">
+  <div class="class-header">
+    <img [src]="poseImg" />
+
+    <!-- <app-round-photo 
+            *ngIf="teacher"
+            [image]="teacher?.image"></app-round-photo> -->
+  </div>
+  <div class="class-content">
+    <audio
+      *ngIf="audioSrc"
+      [src]="audioSrc"
+      (loadedmetadata)="getDuration()"
+      #audio
+    ></audio>
+    <h1 class="text-display-2">
+      {{ singleClass.title || emptyField
+      }}<span *ngIf="canEdit && singleClass.status">
+        - {{ singleClass.status | uppercase }}</span
+      >
+    </h1>
+    <div class="text-display-6 class-details">
+      <p *ngIf="!hideClassLength">
+        <span class="text-display-5">Length:</span>
+        {{ classLength | minuteSeconds }}
+      </p>
+      <p [ngClass]="{ 'level-paragraph': hideClassLength }">
+        <span class="text-display-5">Level:</span>
+        {{ singleClass.difficulty || emptyField }}
+      </p>
+    </div>
+    <div
+      class="text-display-3 class-description"
+      *ngIf="singleClass.description && singleClass.description.length > 0"
+      [innerHTML]="
+        (singleClass.description | replaceLineBreaks | excerpt: 200 | getParsedTextWithHref) ||
+          emptyField | safeHTML
+      "
+    ></div>
+
+    <div
+      class="cta"
+      [ngClass]="{
+        'single-btn': (!canEdit && !customContent) || canEdit
+      }"
+    >
+      <ng-container *ngIf="!customContent">
+        <ng-container *ngIf="!canEdit">
+          <a
+            class="btn btn-bordered btn-small"
+            *ngIf="teacher?.slug && singleClass?.slug"
+            [routerLink]="[
+              '/',
+              routeNames.teachers,
+              teacher.slug,
+              routeNames.recordings,
+              singleClass.slug
+            ]"
+          >
+            Practice
+          </a>
+        </ng-container>
+
+        <ng-container *ngIf="canEdit">
+          <a
+            class="btn btn-bordered btn-small "
+            *ngIf="singleClass?.slug"
+            [routerLink]="[
+              '/',
+              routeNames.teacher,
+              routeNames.recordings,
+              singleClass.slug
+            ]"
+            >View</a
+          >
+          <!-- 
+                    <button 
+                        class="btn btn-bordered btn-small" 
+                        (click)="deleteRecording()">Delete</button>
+        
+
+                    <button 
+                        class="btn btn-bordered btn-small"
+                        (click)="onClassEdit()">Edit</button>
+     -->
+          <!-- <a class="btn btn-bordered btn-small" 
+                        *ngIf="singleClass?.slug"
+                        [routerLink]="[singleClass.slug, routeNames.editAudio]">Edit class details</a> -->
+        </ng-container>
+      </ng-container>
+
+      <div #ref class="custom-content" *ngIf="customContent">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

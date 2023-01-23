@@ -1,0 +1,17 @@
+<div>
+  <mat-spinner
+    *ngIf="!uploadError"
+    class="spinner-wrapper"
+    color="accent"
+    diameter="80"
+    strokeWidth="7"
+  ></mat-spinner>
+  <div *ngIf="isAddText" class="spinner-text">
+    <h2 class="progress">{{ progress || '0' }}%</h2>
+    <h3>{{ progress === 100 ? 'Processing...' : 'We are uploading your class now, it may take a few minutes.' }}</h3>
+  </div>
+  <div *ngIf="uploadError" class="spinner-text">
+    <h3>{{ errorText }}</h3>
+    <h3>An error occurred while uploading the file. Please try again.</h3>
+  </div>
+</div>

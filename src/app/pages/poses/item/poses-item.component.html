@@ -1,0 +1,10 @@
+<section class="wrapper" *ngIf="pose && !spinner.isShowing.value">
+  <img *ngIf="pose.image"
+    [src]="pose.image" alt="" />
+  <h1 class="title-display-3">{{ pose.title }}</h1>
+  <p *ngIf="pose.title_sanskrit"
+    class="text-display-2">{{pose.title_sanskrit}}</p>
+  <hr>
+  <div class="text-display-3 wysiwyg"
+    [innerHTML]="pose?.text | safeHTML"></div>
+</section>

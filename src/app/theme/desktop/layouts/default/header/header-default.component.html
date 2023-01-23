@@ -1,0 +1,30 @@
+<mat-toolbar class="header">
+  <mat-toolbar-row>
+    <div *ngIf="showBackButton">
+      <a class="btn left-arrow-btn" 
+        (click)="goBack()"></a>
+    </div>
+   
+    <p class="text-center text-display-1 header-title" *ngIf="title; else noTitle">
+      {{ title }}
+    </p>
+
+    <ng-template #noTitle>
+      <div class="text-center width-100" *ngIf="!hideNav">
+        <a [routerLink]="['/']" class="logo-link">
+          <app-icon
+            [width]="30"
+            [icon]="'logo-header'"></app-icon>
+        </a>
+      </div>
+    </ng-template>
+
+    <button *ngIf="user" 
+      type="button"
+      (click)="onToggleSidenav()">
+      <app-icon 
+        [width]="24"
+        [icon]="'menu_icon'"></app-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

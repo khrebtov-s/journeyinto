@@ -1,0 +1,32 @@
+<div mat-dialog-content
+    (swipeleft)="swipe($event.type, stepper)" 
+    (swiperight)="swipe($event.type, stepper)">
+    <mat-horizontal-stepper 
+        linear 
+        #stepper
+        >
+      <mat-step *ngFor="let step of steps">
+        <div class="step-content">
+          <div class="step-text">
+            <h1 *ngIf="step.title">{{step.title}}</h1>
+            <div class="step-body" *ngIf="step.body" 
+              [innerHTML]="step.body | safeHTML"></div>
+          </div>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+</div>
+<div mat-dialog-actions>
+    <button
+        mat-ripple 
+        class="btn"
+        (click)="stepper?.selectedIndex === stepper?._steps?.length - 1 ? 
+          closeModal() : 
+          goForward(stepper)">
+        {{ stepper?.selectedIndex === stepper?._steps?.length - 1 ? 'Done' : 'Next' }}
+    </button>
+    <a mat-ripple 
+      class="skip-btn text-display-1 pointer"
+      (click)="closeModal()">Skip</a>
+</div>
+  

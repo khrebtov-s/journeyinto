@@ -1,0 +1,97 @@
+@import '../../../../common/styles.common.scss';
+
+$max-width: calc(100% - 40px);
+$width: 310px;
+$height: 46px;
+
+.home-link {
+  display: flex;
+  align-items: center;
+  outline: none;
+
+  &__logo {
+    outline: none;
+  }
+}
+
+.menu-list-wrapper {
+  a {
+    span {
+      margin-right: auto;
+    }
+  }
+}
+
+.menu-nav {
+  height: 48px;
+  width: 100%;
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  place-content: flex-end;
+
+  background-color: map-get($palette, white);
+  border-bottom: solid 1px map-get($palette, 60);
+}
+
+.mat-nav-list {
+  margin-top: 48px;
+}
+
+
+.mat-list-base .mat-list-item {
+  min-width: 300px;
+  height: 66px;
+  line-height: 22px;
+  color: map-get($palette, black);
+  border-bottom: solid 1px map-get($palette, 60);
+}
+
+.active-menu-item {
+  background-color: map-get($palette, semiTransparent);
+}
+
+.switch-btn-content {
+  padding: 0;
+  max-width: $max-width;
+  width: $width;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+}
+
+.switch-btn {
+  cursor: pointer;
+  width: 50%;
+  height: 100%;
+  padding: 12px 24px;
+  
+  border: solid 1px map-get($palette, white);
+  background-color: map-get($palette, black);
+  color: map-get($palette, white);
+}
+
+.switch-1 {
+  border-radius: 100px 0 0 100px;
+}
+
+.switch-2 {
+  border-radius: 0 100px 100px 0;
+}
+
+.active-btn {
+  background-color: transparent;
+  color: map-get($palette, black);
+  border: none;
+}
+
+.logout-btn {
+  max-width: $max-width;
+  width: $width;
+  margin-bottom: 30px;
+}

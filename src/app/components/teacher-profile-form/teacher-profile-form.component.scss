@@ -1,0 +1,53 @@
+hr {
+  margin: 40px 0;
+}
+
+a.skip-btn {
+  cursor: pointer;
+  margin-top: 30px;
+  display: block;
+  text-align: center;
+}
+
+.switch-btn-content {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0;
+  // border: 0;
+  margin-bottom: 1rem;
+
+  button {
+    background: beige;
+    cursor: pointer;
+    padding: 16px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Futura Std Medium", serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    color: #322b23;
+    border: none;
+
+    @media screen and (max-width: 500px) {
+      width: 0;
+    }
+
+    &.active-btn {
+      color: #fff;
+      background-color: #322b23;
+    }
+
+    &:first-child {
+      border-radius: 100px 0 0 100px;
+    }
+
+    &:last-child {
+      border-radius: 0 100px 100px 0;
+    }
+  }
+}

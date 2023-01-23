@@ -1,0 +1,175 @@
+@import "../../../common/styles.common";
+
+button {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.btn {
+  -webkit-appearance: none;
+
+  cursor: pointer;
+  padding: 16px 24px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  font-family: "Futura Std Medium", serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: map-get($palette, white);
+
+  background-color: map-get($palette, black);
+  border: none;
+  border-radius: 100px;
+
+  &.btn-small {
+    padding: 6px 12px;
+  }
+
+  &.btn-medium {
+    padding: 12px 24px;
+  }
+
+  &.btn-bordered {
+    border: solid 1px map-get($palette, black);
+    background-color: map-get($palette, white);
+    color: map-get($palette, black);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+// .menu-btn {
+
+//   height: 24px;
+//   width: 24px;
+//   background: transparent url(/assets/img/menu_icon.svg) no-repeat center center;
+// }
+
+.app-filled-btn {
+  min-width: 312px;
+  height: 48px;
+  background-color: map-get($palette, black);
+  line-height: 19px;
+}
+
+.app-small-filled-btn {
+  min-width: 104px;
+  height: 32px;
+  background-color: map-get($palette, black);
+  border-radius: 16px;
+  line-height: 19px;
+}
+
+.small-btn {
+  min-width: 72px;
+  height: 32px;
+  background-color: transparent;
+  color: map-get($palette, black);
+  border-radius: 16px;
+  line-height: 19px;
+}
+
+.right-arrow-btn {
+  height: 18px;
+  width: 18px;
+  color: map-get($palette, black);
+  margin-left: auto;
+  padding-left: 0;
+  padding-right: 0;
+  background: url(/assets/img/arrow_right.svg) no-repeat center center;
+}
+
+.left-arrow-btn {
+  height: 18px;
+  width: 18px;
+  color: map-get($palette, black);
+  background: url(/assets/img/arrow_left.svg) no-repeat center center;
+  background-color: transparent;
+}
+
+.close-menu-btn {
+  height: 18px;
+  width: 18px;
+  padding-left: 0;
+  padding-right: 0;
+  color: map-get($palette, black);
+  margin-left: auto;
+  background: url(/assets/img/close_icon.svg) no-repeat center center;
+}
+
+.copy-link-btn {
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  transform: rotate(0deg) scaleY(-1);
+  background: url(/assets/img/copy_icon.svg) no-repeat center center;
+}
+
+.play-btn {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background-color: transparent;
+
+  @media screen and (max-width: 500px) {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.record-start-btn {
+  width: 122px;
+  height: 122px;
+  background: url(/assets/img/record_start.svg) no-repeat center center;
+  background-size: contain;
+}
+
+.record-stop-btn {
+  width: 122px;
+  height: 122px;
+  background: url(/assets/img/record_stop.svg) no-repeat center center;
+  background-size: contain;
+}
+
+.add-btn {
+  width: 18px;
+  height: 18px;
+  background: url(/assets/img/add_icon.svg) no-repeat center center;
+  padding: 0;
+}
+
+.two-col-btns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .btn {
+    width: calc(50% - 5px);
+
+    @media all and (max-width: 450px) {
+      width: 100%;
+
+      &:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

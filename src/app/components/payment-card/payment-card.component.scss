@@ -1,0 +1,54 @@
+@import '../../theme/common/styles.common.scss';
+
+$small-width: 425px;
+
+article {
+    padding: 15px;
+
+    &.is-active {
+        padding: 0;
+
+        .content-wrapper,
+        .active-message {
+            padding: 15px;
+        }
+    }
+
+
+
+    .content-wrapper {
+        display: flex;
+
+        @media all and (max-width: $small-width) {
+            flex-direction: column;
+        }
+    }
+}
+
+.content {
+    flex: 1;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.active-message {
+    background-color: map-get($palette, 30);
+}
+
+.cta {
+    width: 150px;
+
+    @media all and (max-width: $small-width) {
+        width: 100%;
+
+        &.has-content {
+            margin-top: 20px;
+        }
+    }
+
+    ::ng-deep .make-default-btn {
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,38 @@
+@import '../../theme/common/styles.common.scss';
+
+.form-header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    z-index: 1000;
+
+    background-color: map-get($palette, white);
+}
+
+span {
+    display: block;
+    margin-top: 53px;
+}
+
+.form-header {
+    position: relative;
+    padding: 15px 20px;
+
+    .left-arrow-btn {
+        position: absolute;
+        padding: 0;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 0;
+}

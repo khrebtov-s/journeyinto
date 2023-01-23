@@ -1,0 +1,45 @@
+<div class="m-t-18" [ngStyle]="{ display: showStripeForm ? 'block' : 'none' }">
+  <form id="payment-form" class="form-one" [formGroup]="paymentCardForm">
+    <ng-container *ngIf="paymentCardForm.get('name'); let name">
+        <app-ji-input 
+            [parentForm]="paymentCardForm" 
+            [type]="'name'"
+            [input]="'name'" 
+            [title]="'Name on card'"
+            [errors]="name.errors"
+            [hasError]="name.invalid && (name.dirty || name.touched)"></app-ji-input>
+    </ng-container>
+
+    <ng-container>
+      <label class="text-display-4">Payment card information</label>
+      <div id="card-element" class="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+      <!-- Used to display Element errors. -->
+      <div id="card-errors"></div>
+    </ng-container>
+
+    <ng-container *ngIf="!canSetDefault">
+      <p class="text-display-6">*This card will become your new active payment method.</p>
+    </ng-container>
+    <ng-container *ngIf="canSetDefault && paymentCardForm.get('toAccount'); let terms">
+      <app-ji-checkbox 
+        [parentForm]="paymentCardForm"
+        [name]="'toAccount'">
+        Make this card default
+      </app-ji-checkbox>
+    </ng-container>
+
+    <button class="btn"
+      type="submit"
+      [disabled]="paymentCardForm.invalid || stripeError">
+      {{ slug ? 'Confirm subscription and pay' : 'Add card' }}
+    </button>
+  </form>
+</div>
+
+<button 
+  class="btn btn-bordered new-payment-btn" 
+  (click)="toggleFormShown()">
+  {{showStripeForm ? 'Cancel' : 'Enter a new payment method' }}
+</button>

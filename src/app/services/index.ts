@@ -1,0 +1,12 @@
+export { AuthenticationService } from './authentication/authentication.service';
+export { AuthorizationService } from './authorization/authorization.service';
+export { SignUpService } from './sign-up/sign-up.service';
+export { ForgottenPasswordService } from './forgotten-password/forgotten-password.service';
+export { UserService } from './user/user.service';
+export { ErrorsService } from './errors/errors.service';
+export { SpinnerOverlayService } from './spinner-overlay/spinner-overlay.service';
+export { OnboardingService } from './onboarding/onboarding.service';
+export { TeacherService } from './teacher/teacher.service';
+export { AudioRecordingService } from './audio/audio-recording.service';
+export { StripeService } from './stripe/stripe.service';
+export { VideoService } from './video/video.service';

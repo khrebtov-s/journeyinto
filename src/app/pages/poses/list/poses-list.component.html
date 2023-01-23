@@ -1,0 +1,16 @@
+<section class="wrapper" *ngIf="!spinner.isShowing.value">
+  <ul>
+    <li *ngFor="let pose of poses">
+      <a class="card"
+        routerLink="{{ pose.slug }}">
+        <img *ngIf="pose.thumbnail"
+          [src]="pose.thumbnail" 
+          class="pose-image-rounded" />
+        <img *ngIf="!pose.thumbnail"
+          [src]="'/assets/img/class.png'" 
+          class="pose-image-rounded" />
+        <h1 class="text-display-2">{{ pose.title }} <span *ngIf="pose.title === 'Triangle pose'">looooogn</span></h1>
+      </a>
+    </li>
+  </ul>
+</section>

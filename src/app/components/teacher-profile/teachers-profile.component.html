@@ -1,0 +1,171 @@
+<ng-container *ngIf="teacher && !spinner.isShowing.value">
+  <app-message [message]="message"></app-message>
+
+  <section class="personal-details">
+    <div class="wrapper-full profile-image" *ngIf="teacher.image">
+      <img src="{{ teacher.image }}" alt="Teacher profile photo" />
+      <h1 class="title-display-6">
+        {{ teacher.first_name }} {{ teacher.last_name }}
+      </h1>
+    </div>
+    <div class="wrapper">
+      <div class="main-details">
+        <p class="text-display-6" *ngIf="teacher.qualifications">
+          {{ teacher.qualifications }}
+        </p>
+        <p class="text-display-5" *ngIf="teacher.style">{{ teacher.style }}</p>
+        <p class="teacher-contacts text-display-3">
+          <span *ngIf="teacher.city">{{ teacher.city }},</span
+          ><a href="mailto:{{ teacher.email }}">{{ teacher.email }}</a>
+        </p>
+        <hr />
+      </div>
+    </div>
+  </section>
+
+  <section class="about wrapper" *ngIf="teacher.description || isValidVimeoUrl">
+    <div
+      class="text-display-3"
+      *ngIf="teacher.description"
+      [innerHTML]="teacher.description | replaceLineBreaks | safeHTML"
+    ></div>
+
+    <ng-container *ngIf="isValidVimeoUrl">
+      <div class="video-container">
+        <iframe
+          [src]="teacher.vimeo_url | safeVideo"
+          frameborder="0"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </ng-container>
+  </section>
+
+  <section class="news-events wrapper" *ngIf="!!teacher.news_events">
+    <h1 class="text-display-2">News & Events</h1>
+    <hr />
+    <div
+      class="text-display-3"
+      [innerHTML]="teacher.news_events | replaceLineBreaks | safeHTML"
+    ></div>
+  </section>
+
+  <section
+    class="classes wrapper"
+    *ngIf="!isSubscribed && teacher.sample_classes?.length"
+  >
+    <h1 class="text-display-2">Short classes</h1>
+
+    <ul>
+      <li *ngFor="let record of teacher.sample_classes">
+        <app-class-card
+          [singleClass]="record"
+          [teacher]="teacher"
+        ></app-class-card>
+      </li>
+    </ul>
+  </section>
+  <section
+    class="classes wrapper"
+    *ngIf="isSubscribed && teacher.classes?.length"
+  >
+    <h1 class="text-display-2">Teacher classes</h1>
+
+    <ul>
+      <li *ngFor="let record of teacher.classes">
+        <app-class-card
+          [singleClass]="record"
+          [teacher]="teacher"
+        ></app-class-card>
+      </li>
+    </ul>
+  </section>
+
+  <section class="external-links wrapper" *ngIf="links?.length">
+    <h1 class="text-display-2">External links</h1>
+    <hr />
+    <ul *ngFor="let link of links">
+      <li>
+        <a class="text-display-5" class="links" href="{{ link.url }}" target="_blank">
+          <img src="assets/img/{{ link?.icon ? link.icon : 'link' }}.png" />
+          {{ link?.label }}
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="url wrapper" *ngIf="canEdit">
+    <h1 class="text-display-2">Your personal link</h1>
+    <hr />
+    <p class="text-displaty-3">
+      Share with your students so they can find you instantly
+    </p>
+    <div class="copy-area">
+      <input
+        type="text"
+        value="{{ appUrl }}/{{ routeNames.teachers }}/{{ teacher.slug }}"
+        #profileUrl
+      />
+      <p class="text-display-6">
+        {{ appUrl }}/{{ routeNames.teachers }}/{{ teacher.slug }}
+      </p>
+      <span *ngIf="copied">Copied!</span>
+    </div>
+    <button
+      mat-ripple
+      type="button"
+      (click)="copyProfileUrl(profileUrl)"
+      class="btn btn-bordered"
+    >
+      Copy url
+    </button>
+  </section>
+
+  <section
+    class="cta wrapper"
+    *ngIf="
+      canEdit || (!canEdit && (selectable || canSubscribe || !isAuthorized))
+    "
+  >
+    <a
+      *ngIf="canEdit"
+      [routerLink]="['/', routeNames.teacher, routeNames.profileEdit]"
+      mat-ripple
+      class="btn"
+      >Edit profile</a
+    >
+    <div *ngIf="!canEdit">
+      <div class="connect-cta" *ngIf="selectable || !isAuthorized">
+        <p class="text-display-3">
+          Connect to your teacher’s profile to keep up to date with their
+          teaching schedules, news, events and retreats.
+        </p>
+        <button mat-ripple (click)="handleConnectToTeacher()" class="btn">
+          Connect to {{ teacher.first_name }}
+        </button>
+      </div>
+      <div class="subscribe-cta" *ngIf="canSubscribe || !isAuthorized">
+        <ng-container *ngIf="!isSubscribed">
+          <p class="text-display-3">
+            Your teacher is recording new classes every week so you can practice
+            anywhere, any time with the support of their familiar phrasing and
+            sequences.
+          </p>
+          <button (click)="handleSubscribeToTeacher()" class="btn" mat-ripple>
+            Subscribe to {{ teacher.first_name
+            }}{{
+              teacher.product
+                ? " for " +
+                  (teacher.product.cost
+                    | currency: teacher.currency.toUpperCase()) +
+                  " a " +
+                  teacher.product.frequency
+                : ""
+            }}
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+</ng-container>

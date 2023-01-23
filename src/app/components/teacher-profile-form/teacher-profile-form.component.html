@@ -1,0 +1,193 @@
+<ng-container *ngIf="!spinner.isShowing.value">
+  <div *ngIf="errors" class="text-error m-t-24 m-b-24">
+    {{ errors }}
+  </div>
+
+  <app-profile-image-edit
+    [file]="selectedImage"
+    [user]="user"
+    [status]="status"
+    [requestStatus]="requestStatus"
+    (profileImageUploaded)="onProfileImageUploaded($event)"
+  ></app-profile-image-edit>
+
+  <form [formGroup]="stepOneForm" class="form-one">
+    <ng-container *ngIf="stepOneForm.get('profile_title'); let profileTitle">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'profile_title'"
+        [title]="'Profile name'"
+        [placeholder]="''"
+        [explainerText]="'This is how your students will search for you.'"
+        [errors]="profileTitle.errors"
+        [hasError]="profileTitle.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('city'); let city">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'city'"
+        [title]="'Location'"
+        [placeholder]="'East London, Central London'"
+        [explainerText]="
+          'Where do you spend the majority of your time teaching?'
+        "
+        [errors]="city.errors"
+        [hasError]="city.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <ng-container>
+      <p class="text-display-4">Choose currency</p>
+      <div fxLayout="row" fxLayoutAlign="center">
+        <div class="btn btn-bordered switch-btn-content">
+          <button
+            *ngFor="let currency of viewCurrences"
+            [ngClass]="{ 'active-btn': currency.active }"
+            (click)="switchUserCurrency(currency.value)"
+          >
+            {{ currency.name }}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('description'); let description">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [type]="'textarea'"
+        input="description"
+        [teachersLink]="true"
+        [title]="'About You'"
+        [placeholder]="''"
+        [explainerText]="
+          'Tell your students a bit about yourself. E.g. How did you come to be a teacher? What sort of experience do you have? Where are you from? Why do you love teaching? What are the principals and ethos behind the way you teach? How do you teach? For example; Is it breath led? Do you teach to music? Is it dynamic or gentle? Any other friendly or personal note you’d like to mention?'
+        "
+        [errors]="description.errors"
+        [hasError]="description.invalid && stepOneFormSubmitted"
+        (teachersLinkChange)="teachersLinkChange()"
+      >
+      </app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('news_events'); let newsEvents">
+      <app-ji-input
+        #validatedField
+        [type]="'textarea'"
+        [parentForm]="stepOneForm"
+        [input]="'news_events'"
+        [title]="'News & events'"
+        [errors]="newsEvents.errors"
+        [hasError]="newsEvents.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('style'); let style">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'style'"
+        [title]="'What do you teach?'"
+        [placeholder]="'Vinyasa, Ashtanga, Pregnancy'"
+        [explainerText]="'List what you teach with a comma separating each'"
+        [errors]="style.errors"
+        [hasError]="style.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <ng-container *ngIf="stepOneForm.get('qualifications'); let qualifications">
+      <app-ji-input
+        #validatedField
+        [parentForm]="stepOneForm"
+        [input]="'qualifications'"
+        [title]="'Training'"
+        [placeholder]="'RYT 200hrs, Post natal, Pilates'"
+        [errors]="qualifications.errors"
+        [hasError]="qualifications.invalid && stepOneFormSubmitted"
+      ></app-ji-input>
+    </ng-container>
+
+    <fieldset class="external-urls">
+      <p class="text-display-4">Links to Websites, Social Media and Events</p>
+      <fieldset
+        class="m-b-30"
+        formArrayName="links"
+        *ngFor="let item of stepOneForm.get('links')['controls']; let i = index"
+      >
+        <ng-container [formGroupName]="i">
+          <ng-container *ngIf="item.get('label'); let label">
+            <app-ji-input
+              [parentForm]="item"
+              [input]="'label'"
+              [id]="'label-' + item.value.id"
+              [title]="'Title'"
+              [errors]="label.errors"
+              [hasError]="
+                (label.invalid || !isLinksValid) && stepOneFormSubmitted
+              "
+            ></app-ji-input>
+          </ng-container>
+          <ng-container *ngIf="item.get('url'); let url">
+            <app-ji-input
+              [parentForm]="item"
+              [input]="'url'"
+              [title]="'Url'"
+              [id]="'url-' + item.value.id"
+              [placeholder]="'Starts with http:// or https://'"
+              [errors]="url.errors"
+              [customErrorText]="{
+                pattern: 'This needs to be a valid url'
+              }"
+              [hasError]="
+                (url.invalid || !isLinksValid) && stepOneFormSubmitted
+              "
+            ></app-ji-input>
+          </ng-container>
+
+          <button
+            mat-ripple
+            type="button"
+            class="btn btn-large bg-20 btn-rounded m-t-12"
+            (click)="removeAddress(i)"
+          >
+            Remove
+          </button>
+        </ng-container>
+      </fieldset>
+
+      <button
+        mat-ripple
+        type="button"
+        class="btn btn-large btn-rounded btn-bordered bg-white font-color-10 width-100"
+        [disabled]="status === requestStatus.pending"
+        (click)="handleAddAnotherExternalUrlClick()"
+      >
+        {{
+          stepOneForm.get("links")["controls"].length > 0
+            ? "Add another"
+            : "Add An External Url"
+        }}
+      </button>
+    </fieldset>
+
+    <hr />
+
+    <button
+      mat-ripple
+      type="button"
+      class="btn"
+      [disabled]="status === requestStatus.pending"
+      (click)="handleNextClick(false)"
+    >
+      {{ ctaText }}
+    </button>
+
+    <a *ngIf="allowSkip" class="skip-btn" (click)="handleNextClick(true)"
+      >Skip</a
+    >
+  </form>
+</ng-container>

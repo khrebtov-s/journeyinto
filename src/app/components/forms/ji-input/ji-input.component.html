@@ -1,0 +1,76 @@
+<div [formGroup]="parentForm" class="form-input">
+  <label [for]="input" class="text-display-4" #inputEl>{{ title }}</label>
+  <span
+    class="input-container"
+    [ngClass]="{
+      'ji-error': hasError,
+      'ji-valid': isValid
+    }"
+  >
+    <input
+      *ngIf="isSimpleInputField"
+      [type]="type"
+      [formControlName]="input"
+      [name]="input"
+      [id]="id ? id : input"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      class="text-display-3"
+    />
+
+    <textarea
+      rows="3"
+      *ngIf="type === 'textarea'"
+      [formControlName]="input"
+      [name]="input"
+      [id]="id ? id : input"
+      [placeholder]="placeholder"
+      autocomplete="off"
+      class="text-display-3"
+    ></textarea>
+
+    <select
+      *ngIf="type === 'select' && options.length > 0"
+      [formControlName]="input"
+      [name]="input"
+      [id]="id ? id : input"
+      [ngClass]="{
+        placeholder: !value
+      }"
+    >
+      <option value="" [selected]="!value">{{ placeholder }}</option>
+      <option
+        *ngFor="let option of options"
+        [selected]="value && value === option.value"
+        [value]="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+  </span>
+
+  <p class="text-display-6 explainer-text" *ngIf="explainerText">
+    {{ explainerText }}
+  </p>
+
+  <p
+    class="text-display-6 explainer-text"
+    *ngIf="!teachersLink && input === 'description'"
+  >
+    For inspiration, see some
+    <a [routerLink]="['/', routeNames.teachers]"
+      >Journey Into Profile examples</a
+    >.
+  </p>
+
+  <p class="text-display-6 explainer-text" *ngIf="teachersLink">
+    For inspiration, see some
+    <a (click)="teachersLinkChange.emit()">Journey Into Profile examples</a>.
+  </p>
+
+  <ul *ngIf="hasError" class="input-error">
+    <li *ngFor="let error of errorsArray">
+      <p>{{ error.text }}</p>
+    </li>
+  </ul>
+</div>

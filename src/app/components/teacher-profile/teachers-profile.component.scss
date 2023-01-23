@@ -1,0 +1,137 @@
+@import '../../theme/common/styles.common.scss';
+
+section {
+    &:not(.personal-details) {
+        margin-top: 40px;
+    }
+
+    &.url {
+        button {
+            margin-top: 20px;
+        }
+    }
+}
+
+.main-details {
+    padding-top: 24px;
+}
+
+.personal-details {
+    // padding-top: 24px;
+}
+
+.profile-image {
+    position: relative;
+
+    img {
+        width: 100%;
+    }
+
+    h1 {
+        padding: 0 20px;
+        
+        position: absolute;
+        bottom: 14px;
+        left: 0;
+        
+        color: map-get($palette, white);
+    }
+}
+
+.teacher-contacts {
+    margin-top: 16px;
+    span {
+        margin-right: 5px;
+    }
+}
+
+.video-container {
+    position: relative;
+    margin-top: 30px;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+
+    iframe,
+    object,
+    embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.classes {
+    h1, 
+    li {
+        margin-bottom: 20px;
+    }
+}
+
+.external-links {
+    hr {
+        margin-bottom: 30px;
+    }
+
+    .links {
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        a {
+            display: flex;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+}
+
+.news-events {
+    hr {
+        margin-bottom: 20px;
+    }
+}
+
+.connect-cta {
+    margin-bottom: 24px;
+}
+
+
+.copy-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    input {
+        margin: 10px 0;
+
+        position: absolute;
+        color: transparent;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        border: none;
+    }
+    
+    span {
+        margin: 10px 0;
+        margin-left: 10px;
+     
+        color: map-get($palette, 140);
+    }
+}
+
+.public-profile-link {
+    margin-top: 10px;
+}

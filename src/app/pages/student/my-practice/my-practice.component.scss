@@ -1,0 +1,27 @@
+section {
+    margin-top: 40px;
+
+    &:first-child {
+        margin-top: 24px;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    hr {
+        margin-bottom: 30px;
+    }
+}
+
+.subscribe-cta {
+    button {
+        margin-top: 30px;
+    }
+}
+
+ul {
+    li {
+        margin-bottom: 20px;
+    }
+}

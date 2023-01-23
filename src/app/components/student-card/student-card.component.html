@@ -1,0 +1,11 @@
+<article class="card">
+    <app-round-photo></app-round-photo>
+    <h1 class="text-display-5">{{student.student.user.first_name}}</h1>
+    <div class="cta">
+        <!-- <button *ngIf="ctaText"
+            (click)="handleClick($event)"
+            class="btn btn-bordered btn-small">{{ctaText}}</button> -->
+        <a class="btn btn-bordered btn-small"
+            [routerLink]="[student.user]">View</a>
+    </div>
+</article>

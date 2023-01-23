@@ -1,0 +1,15 @@
+<div class="form-header-container">
+    <section class="form-header">
+        <button *ngIf="canGoBack" 
+            type="button" 
+            class="btn left-arrow-btn" 
+            (click)="goBack()"></button>
+        <a *ngIf="backTo"
+            type="button" 
+            class="btn left-arrow-btn" 
+            [routerLink]="backTo"></a>
+        <h1 class="text-display-2">{{title}}</h1>
+    </section>
+    <hr>
+</div>
+<span></span>

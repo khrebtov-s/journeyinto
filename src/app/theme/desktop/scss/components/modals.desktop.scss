@@ -1,0 +1,8 @@
+.journeyinto-modal  {
+    max-width: 400px!important;
+
+    @media all and (max-width: 400px) {
+        max-width: 90vw!important;
+        height: calc(100vh - 150px);
+    }
+}

@@ -1,0 +1,47 @@
+<form [formGroup]="profileImageForm" enctype="multipart/form-data">
+  <div class="m-t-30">
+    <label class="text-display-4">{{ title }}</label>
+
+    <!-- <div
+      *ngIf="user?.creator?.image && !fileName"
+      class="m-t-24 m-b-24 profile-photo"
+    >
+      <img src="{{ user.creator.image }}" alt="" />
+    </div> -->
+    <div *ngIf="fileName" class="m-t-24 m-b-24">
+      <img
+        *ngIf="accept === 'image/*'"
+        class="preview-image"
+        src=""
+        alt=""
+        #imagePreview
+      />
+
+      <p *ngIf="accept === 'video/*'">{{ videoPreview }}</p>
+      <p *ngIf="accept === 'audio/*'">{{ audioPreview }}</p>
+    </div>
+
+    <div class="m-t-12 m-b-40">
+      <input
+        #profileImageFile
+        name="_image"
+        type="file"
+        [accept]="accept"
+        (change)="onProfileImageForm($event); setFileInfo($event)"
+        class="display-none"
+        id="fileUp"
+      />
+      <input type="hidden" name="image" formControlName="image" />
+
+      <button
+        mat-ripple
+        type="button"
+        class="btn"
+        [disabled]="status === requestStatus.pending"
+        (click)="profileImageFile.click()"
+      >
+        {{ buttonText }}
+      </button>
+    </div>
+  </div>
+</form>

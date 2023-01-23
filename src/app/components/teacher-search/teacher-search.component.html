@@ -1,0 +1,29 @@
+<ng-container *ngIf="teachers">
+    <form>
+        <app-ji-input
+            [parentForm]="filterForm"
+            [input]="'filter'"
+            [placeholder]="'Filter teacher'"></app-ji-input>
+        <span *ngIf="filter.value"
+            class="clear"
+            (click)="clearSearch()">
+            <app-icon [height]="18"
+                [width]="18"
+                [icon]="'close_icon'"></app-icon>
+        </span>
+    </form>
+    <section>
+        <ul  class="teachers-results" *ngIf="filteredTeachers.length > 0; else noResults">
+            <li *ngFor="let teacher of filteredTeachers">
+                <app-teacher-card 
+                    *ngIf="teacher"
+                    [teacher]="teacher"
+                    [selectable]="selectable"
+                    [large]="true"></app-teacher-card>
+            </li>
+        </ul>
+    </section>
+    <ng-template #noResults>
+        <p class="teachers-results" *ngIf="!spinner.isShowing.value">Sorry, no teachers were found.</p>
+    </ng-template>
+</ng-container>

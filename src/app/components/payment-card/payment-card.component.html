@@ -1,0 +1,21 @@
+<article 
+    *ngIf="card"
+    class="card"
+    [ngClass]="{
+        'is-active': isDefault
+    }">
+    <div class="content-wrapper">
+        <div class="content">
+            <h1 class="text-display-2">{{card.name}} - {{ card.brand }}</h1>
+            <p class="text-display-6">Ending ****{{ card.last4 }}</p>
+        </div>
+        <div class="cta"
+            [ngClass]="{
+                'has-content': customCtaContent
+            }"
+            #ref>
+            <ng-content></ng-content>
+        </div>
+    </div>
+    <p class="active-message text-display-4" *ngIf="isDefault">This is your active payment card</p>
+</article>

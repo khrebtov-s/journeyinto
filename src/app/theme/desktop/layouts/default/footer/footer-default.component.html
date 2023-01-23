@@ -1,0 +1,105 @@
+<footer 
+  class="footer" 
+  *ngIf="canSeeFooter">
+  <div class="footer-inner">
+    <ng-container *ngIf="!user">
+      <a [routerLink]="['/', routeNames.login]"
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'account_icon'"></app-footer-icon>
+        <span class="text-display-9">Login</span>
+      </a>
+      <a [href]="externalRoutes.about"
+        target="_blank">
+        <app-footer-icon [icon]="'account_icon'"></app-footer-icon>
+        <span class="text-display-9">About</span>
+      </a>
+      <a [routerLink]="['/', routeNames.poses]"
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'practice_icon'"></app-footer-icon>
+        <span class="text-display-9">Postures</span>
+      </a>
+      <a [routerLink]="['/', routeNames.teachers]"
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'account_icon'"></app-footer-icon>
+        <span class="text-display-9">Teachers</span>
+      </a>
+    </ng-container>
+    <ng-container *ngIf="user && user?.view_status === viewStatuses.STUDENT">
+      <a [routerLink]="['/', routeNames.student]"
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'home_icon'"></app-footer-icon>
+        <span class="text-display-9">Home</span>
+      </a>
+      <a [routerLink]="[ '/', routeNames.student, routeNames.myPractice ]" 
+        routerLinkActive="active-link">
+        <app-footer-icon [icon]="'practice_icon'"></app-footer-icon>
+        <span class="text-display-9">My practice</span>
+      </a>
+      <a [routerLink]="[ '/', routeNames.student, routeNames.calendar ]" 
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'calendar_icon'"></app-footer-icon>
+        <span class="text-display-9">My calendar</span>
+      </a>
+      <a *ngIf="user?.creators?.length && user.creators[0].creator" 
+        [routerLink]="[ '/', routeNames.teachers, user.creators[0]?.creator?.slug ]" 
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'account_icon'"></app-footer-icon>
+        <span class="text-display-9">My teacher</span>
+      </a>
+      <!-- <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center" 
+        [routerLink]="['/', routeNames.student]"
+        routerLinkActive="active-link" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <img class="bot-nav-img m-t-3" src="assets/img/home_icon.svg" />
+        <div class="text-display-9 m-t-6 m-b-3">Home</div>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="[ '/', routeNames.student, routeNames.myPractice ]" routerLinkActive="active-link">
+        <img class="bot-nav-img m-t-3" src="assets/img/practice_icon.svg" />
+        <div class="text-display-9 m-t-6 m-b-3">My practice</div>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="[ '/', routeNames.student, routeNames.calendar ]" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <img class="bot-nav-img m-t-3" src="assets/img/calendar_icon.svg" />
+        <div class="text-display-9 m-t-6 m-b-3">My calendar</div>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="[ '/', routeNames.student, routeNames.account ]" routerLinkActive="active-link">
+        <img class="bot-nav-img m-t-3" src="assets/img/account_icon.svg" />
+        <div class="text-display-9 m-t-6 m-b-3">My account</div>
+      </a> -->
+    </ng-container>
+    <ng-container *ngIf="user && user.view_status === viewStatuses.TEACHER">
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center" [routerLink]="['/', routeNames.teacher]"
+        routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon [icon]="'home_icon'"></app-footer-icon>
+        <span class="text-display-9">Home</span>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="['/', routeNames.teacher, routeNames.recordings, routeNames.new]" routerLinkActive="active-link">
+        <app-footer-icon [icon]="'record_icon'"></app-footer-icon>
+        <span class="text-display-9">Record</span>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="['/', routeNames.teacher, routeNames.bookings]" routerLinkActive="active-link">
+        <app-footer-icon [icon]="'calendar_icon'"></app-footer-icon>
+        <span class="text-display-9">Bookings</span>
+      </a>
+      <a fxFlex="25" fxFlex.xs="25" fxLayout="column" fxLayoutAlign="center center"
+        [routerLink]="['/', routeNames.teacher, routeNames.recordings]" routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        <app-footer-icon 
+          [icon]="'classes_icon'"
+          [classes]="'library'"></app-footer-icon>
+        <span class="text-display-9">Library</span>
+      </a>
+    </ng-container>
+  </div>
+</footer>

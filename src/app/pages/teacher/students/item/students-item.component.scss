@@ -1,0 +1,23 @@
+section {
+    margin-top: 40px;
+
+    &.student-bookings {
+        h1 {
+            margin-bottom: 10px;
+        }
+    }
+
+    &.subscription-status {
+        hr {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.student-details {
+    padding-top: 10px;
+
+    span {
+        display: block;
+    }
+}

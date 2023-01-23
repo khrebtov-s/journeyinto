@@ -1,0 +1,31 @@
+<mat-dialog-content>
+    <div class="close-dialog-img pointer">
+        <img (click)="close()" src="assets/img/close_modal.svg" />
+    </div>
+    <div class="title-display-3 text-center m-b-6">{{ title }}</div>
+    <div class="text-display-3 text-center m-b-6">{{ message }}</div>
+</mat-dialog-content>
+<mat-dialog-actions align="center" class="confirm-buttons-container">
+    <p *ngIf="errors" class="text-error m-t-24">It looks like the email you entered is not valid, please try again.</p>
+    <form [formGroup]="forgottenPasswordForm" class="m-t-24">
+        <ng-container *ngIf="forgottenPasswordForm.get('email'); let email">
+            <app-ji-input
+                [parentForm]="forgottenPasswordForm"
+                [input]="'email'"
+                [type]="'email'"
+                [title]="'Email'"
+                [errors]="email.errors"
+                [isValid]="email.valid && email.value"
+                [hasError]="email.invalid && formSubmitted"></app-ji-input>
+        </ng-container>
+
+        <div class="m-t-12">
+            <button
+                mat-ripple
+                type="submit"
+                class="btn btn-large btn-rounded bg-20 m-b-12 width-100"
+                (click)="handleSubmitClick()"
+                [disabled]="forgottenPasswordForm.invalid">{{confirmButtonText}}</button>
+        </div>
+    </form>
+</mat-dialog-actions>

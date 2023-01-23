@@ -1,0 +1,7 @@
+<section class="wrapper">
+    <ul class="top-block">
+        <li *ngFor="let notification of notifications">
+            <app-notification-card [notification]="notification"></app-notification-card>
+        </li>
+    </ul>
+</section>

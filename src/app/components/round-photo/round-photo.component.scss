@@ -1,0 +1,17 @@
+@import '../../theme/common/styles.common.scss';
+
+.round-img-container {
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border: 1px solid map-get($palette, 70);
+    border-radius: 50%;
+    background-color: map-get($palette, white);
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}

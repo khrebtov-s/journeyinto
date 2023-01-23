@@ -1,0 +1,107 @@
+<div class="wrapper" *ngIf="!spinner.isShowing.value">
+  <section
+    class="complete-register"
+    *ngIf="teacher.stripe_link && !teacher.stripe_user_id"
+  >
+    <app-teacher-stripe-form [showForm]="true"></app-teacher-stripe-form>
+    <hr />
+  </section>
+
+  <ng-container *ngIf="recordings?.length > 0; else noRecordings">
+    <section class="recording-stats" *ngIf="newRecordingStatuses">
+      <!-- <button 
+          class="btn delete-all"
+          (click)="deleteAll()">(temp for dev reasons) DELETE ALL</button> -->
+      <h1 class="text-display-2">New recording status</h1>
+      <hr />
+
+      <ul class="stats text-display-6">
+        <li *ngIf="latestPublished">
+          <span>{{ latestPublished.title }} has been published.</span>
+        </li>
+        <li *ngFor="let recordingStatus of statRecordingStatuses">
+          <ng-container *ngIf="groupedRecordings[recordingStatus.status]">
+            <ul>
+              <li
+                *ngFor="
+                  let recording of groupedRecordings[recordingStatus.status]
+                "
+              >
+                <span>{{ recording.title }} {{ recordingStatus.text }}.</span>
+              </li>
+            </ul>
+          </ng-container>
+        </li>
+      </ul>
+
+      <hr />
+
+      <!-- <a class="btn btn-large btn-rounded bg-20 width-100"
+          [routerLink]="[routeNames.new]">Record new class</a> -->
+    </section>
+
+    <section class="latest-classes">
+      <h1 class="text-display-2">Your classes</h1>
+      <ul class="recordings-list">
+        <li *ngFor="let recording of recordings; let i = index">
+         
+          <div class="dropdown_option">
+            <input
+              #profileImageFile
+              name="_image"
+              type="file"
+              (change)="setFileInfo($event, recording.id)"
+              class="display-none"
+              id="fileUp"
+            />
+            <input type="hidden" name="image" />
+            <button
+              mat-ripple
+              type="button"
+              class="btn btn-bordered btn-small change-thumb"
+              (click)="profileImageFile.click()"
+            >
+              Change thumbnail
+            </button>
+
+            <button
+              [ngClass]="{'active-btn': recording.status === 'published'}"
+              class="btn btn-bordered btn-small patreon-teaser__button"
+              data-toggle="dropdown"
+              tabindex="0"
+              (click)="changeClassStatus(recording.id, recording.status, i)"
+            >
+              {{ recording.status === "published" ? "Unpublish" : "Publish" }}
+            </button>
+            <!-- <div
+              *ngIf="showDropdownMenu[i]"
+              class="dropdown-menu__wrapper"
+              (click)="openDropdownMenu(i)"
+            ></div> -->
+            <!-- <ul class="dropdown-menu" *ngIf="showDropdownMenu[i]">
+              <li
+                (click)="changeClassStatus(recording.id, recording.status, i)"
+              >
+                <a class="link" tabindex="0">{{
+                  recording.status === "published" ? "Unpublish" : "Publish"
+                }}</a>
+              </li>
+            </ul> -->
+          </div>
+          <app-class-card
+            [singleClass]="recording"
+            [canEdit]="true"
+          ></app-class-card>
+        </li>
+      </ul>
+    </section>
+  </ng-container>
+
+  <ng-template #noRecordings>
+    <section class="no-recordings" *ngIf="teacher.stripe_user_id">
+      <h1 class="text-display-2">You have no recorded classes</h1>
+      <!-- <a class="btn" 
+        [routerLink]="['/', routeNames.teacher, routeNames.recordings, routeNames.new]">Record now</a> -->
+    </section>
+  </ng-template>
+</div>

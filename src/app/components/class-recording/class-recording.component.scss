@@ -1,0 +1,184 @@
+@import "../../theme/common/styles.common.scss";
+
+.debug {
+  color: darkred;
+  font-size: 16px;
+}
+
+section {
+  margin-top: 40px;
+}
+
+.video-record {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.audio-controls {
+  margin-bottom: 30px;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-jump-btn {
+  margin: 0 20px;
+  position: relative;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  color: map-get($palette, black);
+  background-color: transparent;
+
+  @media screen and (max-width: 500px) {
+    width: 50px;
+    height: 50px;
+  }
+
+  span {
+    position: absolute;
+  }
+}
+
+.play-btn {
+  .play {
+    padding-left: 6px;
+  }
+}
+
+.go-backwards {
+  app-icon {
+    transform: rotate(180deg);
+    // transform: rotate(180deg) scaleY(-1);
+  }
+}
+
+::ng-deep .mat-slider.recording-slider.mat-accent {
+  width: 100%;
+  cursor: pointer;
+
+  .mat-slider-thumb-label {
+    background-color: map-get($palette, black);
+    color: map-get($palette, white);
+  }
+}
+
+.mat-slider:not(.mat-slider-disabled):not(.mat-slider-sliding)
+  .mat-slider-thumb,
+.mat-slider:not(.mat-slider-disabled):not(.mat-slider-sliding)
+  .mat-slider-thumb-label {
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.recording-thumbnail {
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.tabs-container {
+  min-height: 262px;
+}
+
+.not-found-message {
+  text-align: center;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  a {
+    width: calc(50% - 10px);
+
+    @media all and (max-width: 400px) {
+      width: 100%;
+
+      &:first-child {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.loading-message {
+  margin-top: 20px;
+}
+
+.range-container {
+  padding: 15px 0 20px;
+}
+
+.time-tracker {
+  text-align: right;
+  padding: 8px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 5px;
+  border: none;
+  background: map-get($palette, black);
+  transition: 0.4s all ease-out;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  background-color: map-get($palette, black);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+::ng-deep {
+  .slider-hover {
+    .mat-slider-horizontal .mat-slider-thumb-label {
+      transform: rotate(45deg) !important;
+      border-radius: 50% 50% 0 !important;
+    }
+
+    .mat-slider-thumb {
+      transform: scale(0) !important;
+    }
+
+    .mat-slider-thumb-label-text {
+      opacity: 1 !important;
+    }
+  }
+
+  .mat-slider-horizontal {
+    height: 40px !important;
+  }
+
+  .mat-slider-thumb-label-text {
+    background-color: map-get($palette, black);
+    padding: 10px;
+    border-radius: 50px;
+    margin-bottom: 8px;
+    margin-right: 7px;
+  }
+}
+
+.full-screen {
+  background: url("../../../assets/icons/fullscreen.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}

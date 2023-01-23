@@ -1,0 +1,43 @@
+@import '../../../common/styles.common.scss';
+
+.content {
+  margin-top: 64px;
+  // margin-top: 56px;
+  margin-bottom: 90px;
+  overflow: initial;
+
+  @media all and (max-width: 599px) {
+    margin-top: 56px;
+  }
+}
+
+.sidenav {
+  padding: 12px;
+  border-left: 1px solid map-get($palette, 70);
+}
+
+.mat-drawer-container {
+  margin: 0 auto;
+  min-height: 100vh;
+
+  background-color: initial;
+
+  &.mat-drawer-container-has-open {
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+  }
+}
+
+.mat-drawer-container,
+.mat-sidenav {
+  width: 100%;
+}
+
+::ng-deep .menu-header:not(.mat-drawer-side) {
+  position: fixed;
+}
+
+::ng-deep .mat-drawer-backdrop {
+  position: fixed !important;
+}

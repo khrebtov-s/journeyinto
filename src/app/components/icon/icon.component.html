@@ -1,0 +1,8 @@
+<svg *ngIf="icon" 
+    [attr.width]="width" 
+    [attr.height]="height ? height : width">
+    <image 
+        [attr.xlink:href]="'/assets/img/' + icon + '.svg'" 
+        [attr.width]="width" 
+        [attr.height]="height ? height : width" />
+</svg>
